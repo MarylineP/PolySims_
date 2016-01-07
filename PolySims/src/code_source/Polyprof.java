@@ -9,6 +9,7 @@ public class Polyprof {
 		private String matiere_enseignée ;
 		private String lieu ;
 		
+		
 		//Les jauges
 		private int jauge_energie ;
 		private int jauge_hygiene ;
