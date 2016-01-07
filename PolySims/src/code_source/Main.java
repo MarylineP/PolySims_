@@ -9,7 +9,6 @@ public class Main {
 		Tisserant.corrigerCopies();
 		Tisserant.allerToilette() ;
 		Tisserant.dormir();
-		Tisserant.seDeplacer("soirée");
-		
+		Tisserant.seDeplacer("soirée");	
 	}
 }
