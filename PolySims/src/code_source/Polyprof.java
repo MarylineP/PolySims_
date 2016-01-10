@@ -7,12 +7,12 @@ public class Polyprof extends PolySims{
 		
 	
 	/**
-	 * Fonction corrigerCopies-> 1h , -30 energie  ,  -10 besoin  , + 10 travail
+	 * Fonction corrigerCopies -> 1h , -10 energie  , +5 travail
 	 */
 	public void corrigerCopies(){
-		if (jauge_energie>30) {
-			jauge_energie = jauge_energie - 30 ;
-			jauge_travail = jauge_travail + 10 ; 
+		if (jauge_energie>10 && lieu == "Maison") {
+			jauge_energie = jauge_energie - 10 ;
+			jauge_travail = jauge_travail + 5 ; 
 			heure = heure + 1 ;
 			System.out.println(" Vous avez corriger 15 copies. \n Votre jauge de Travail est à "+ jauge_travail + " et votre energie est de " + jauge_energie) ;
 			System.out.println("Il est " + heure +"h"+minute) ;

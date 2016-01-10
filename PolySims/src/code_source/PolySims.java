@@ -51,7 +51,7 @@ public class PolySims {
 	
 	
 	/**
-	 * Fonction dormir -> 4h  , -40 besoins  , -40 appetit  , -10 sociale  , 100 energie
+	 * Fonction dormir -> 6h  , -40 besoins  , -40 hygiene  , -30 appetit , 100 energie
 	 */
 	public void dormir(){
 		if (jauge_energie == 100) 
@@ -60,11 +60,13 @@ public class PolySims {
 			System.out.println("Vous ne pouvez pas dormir, vous n'etes pas chez vous.") ;
 		else if (jauge_energie != 100 && lieu == "Maison"){
 			jauge_energie = 100 ;
-			heure = heure + 4 ;
+			heure = heure + 6 ;
 			jauge_besoins = jauge_besoins - 40 ;
-			jauge_appetit = jauge_appetit - 40 ;
+			jauge_hygiene = jauge_hygiene - 40 ;
+			jauge_appetit = jauge_appetit - 30 ;
 			System.out.println(" Vous avez bien dormi et votre énergie est à " + jauge_energie +
-				"\n Vos besoins sont de " + jauge_besoins + " votre appetit est de " + jauge_appetit) ;
+				"\n Vos besoins sont de " + jauge_besoins + " , votre appetit est de " + jauge_appetit +
+				" et votre hygiene est de " + jauge_hygiene ) ;
 		}	
 	}
 			
@@ -75,7 +77,15 @@ public class PolySims {
 	public void seDoucher(){
 		if (jauge_hygiene == 100)
 			System.out.println(" Votre hygiene est déjà à " + jauge_hygiene + " , vous n'avez pas besoin de vous doucher") ;
+		if( lieu != "Maison")
+			System.out.println("Vous ne pouvez pas vous doucher, vous n'etes pas chez vous.") ;
 		else {
+			if( minute < 40)
+				minute = minute + 20 ;
+			else if (minute == 50){
+				heure = heure + 1 ;
+				minute = 10 ;
+			}
 			jauge_hygiene = 100 ;
 			System.out.println(" Vous avez terminé de prendre votre douche et votre jauge est à " + jauge_hygiene ) ;
 		}
@@ -88,18 +98,16 @@ public class PolySims {
 	public void allerToilette(){
 		if (jauge_besoins == 100) 
 			System.out.println(" Vous n'avez pas besoin d'aller aux toilettes") ;
-		else if (minute < 50){
-			jauge_besoins = 100 ;
-			minute = minute + 10 ;
-			System.out.println(" Vous avez fait un bon pipi et votre jauge est à " + jauge_besoins) ;
-			System.out.println("Il est " + heure+"h"+minute) ;
-		}	
-		else if (minute == 50){
-			jauge_besoins = 100 ;
-			heure = heure + 1 ;
-			minute = 00 ;
-			System.out.println(" Vous avez fait un bon pipi et votre jauge est à " + jauge_besoins) ;
-			System.out.println("Il est " + heure+"h"+minute) ;
+		else {
+			if(minute < 50)
+				minute = minute + 10 ;	
+			else if (minute == 50){
+				heure = heure + 1 ;
+				minute = 00 ;
+			}
+		jauge_besoins = 100 ;
+		System.out.println(" Vous avez fait un bon pipi et votre jauge est à " + jauge_besoins) ;
+		System.out.println("Il est " + heure+"h"+minute) ;
 		}
 	}
 	
@@ -111,7 +119,7 @@ public class PolySims {
 	 */
 	public void seDeplacer(String s){
 		lieu = s ;
-		if (s == "Maison") {
+		if (jauge_energie > 20){
 			if (minute < 40)
 				minute = minute + 20 ;
 			else if (minute == 40){
@@ -122,39 +130,28 @@ public class PolySims {
 				minute = 10 ;
 				heure = heure + 1 ;
 			}
-			jauge_hygiene = jauge_hygiene - 10 ;
+		jauge_energie = jauge_energie - 20 ;
+		System.out.println("Vous etes à " + lieu + " il est " + heure + "h" + minute+ " et votre énergie est à " +jauge_energie) ;
+		}	
+	}
+	
+	
+	public void allerTravailler(){
+		if (jauge_energie > 20 && jauge_appetit > 40 && lieu == "Ecole"){
+			heure = heure + 4 ;
+			jauge_appetit = jauge_appetit - 40 ;
 			jauge_energie = jauge_energie - 20 ;
-			System.out.println("Vous etes chez vous et il est " + heure + "h" + minute + " et votre énergie est à " +jauge_energie) ;
-		}
-		else if (s == "Ecole"){
-			if (minute < 40)
-				minute = minute + 20 ;
-			else if (minute == 40){
-				minute = 00 ;
-				heure = heure + 1 ;
-			}
-			else if (minute == 50){
-				minute = 10 ;
-				heure = heure + 1 ;
-			}
-			jauge_hygiene = jauge_hygiene - 10 ;
-			jauge_energie = jauge_energie - 20 ;
-			System.out.println("Vous etes chez à Polytech et il est " + heure + "h" + minute+ " et votre énergie est à " +jauge_energie) ;
-		}
-		else if (s == "Soirée"){
-			if (minute < 40)
-				minute = minute + 20 ;
-			else if (minute == 40){
-				minute = 00 ;
-				heure = heure + 1 ;
-			}
-			else if (minute == 50){
-				minute = 10 ;
-				heure = heure + 1 ;
-			}
-			jauge_hygiene = jauge_hygiene - 10 ;
-			jauge_energie = jauge_energie - 20 ;
-			System.out.println("Vous etes à une soirée et il est " + heure + "h" + minute+ " et votre énergie est à " +jauge_energie) ;
-		}
+			jauge_travail = jauge_travail + 1 ;
+			System.out.println("Vous etes à " + lieu + " il est " + heure + "h" + minute+ " "
+					+ " votre énergie est à " +jauge_energie + " votre appetit est à " + jauge_appetit
+					+ " et votre jauge de travail est de " + jauge_travail ) ;
+		}	
+		else if( lieu != "Ecole")
+			System.out.println("Vous devez vous rendre à l'école.") ;
+		else if( jauge_appetit < 40)
+			System.out.println("Vous devez d'abord manger.") ;
+		else if( jauge_energie <20)
+			System.out.println("Vous etes trop fatigué pour travailler") ;
+			
 	}
 }
