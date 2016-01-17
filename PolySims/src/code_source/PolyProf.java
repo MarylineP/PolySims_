@@ -1,6 +1,6 @@
 package code_source;
 
-public class Polyprof extends PolySims{
+public class PolyProf extends PolySims{
 	
 	// Ce qui définit un PolyProf
 	private String matiere_enseignée ;
