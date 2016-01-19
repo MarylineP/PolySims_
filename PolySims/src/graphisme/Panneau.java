@@ -2,6 +2,7 @@ package graphisme;
 
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,18 +13,34 @@ import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import code_source.PolyProf;
+import code_source.PolySims;
 import code_source.PolyStud;
 
 
 public class Panneau extends JPanel{
-	private JButton bouton = new JButton ("Jouer") ;
+	private PolyProf polyprof ;
+	private PolyStud polystud ;
+	private PolySims polysim ;
+	
+	private JTextArea texte ;
+	
+	private String nom ;
+	private String prenom ;
+	private String genre ;
+	private int age ;
+	private String sexe ;
+	
+	private JButton bouton = new JButton ("Commencer") ;
 	private int clic ;
 	
 	//Boutons radios
@@ -48,6 +65,8 @@ public class Panneau extends JPanel{
 	private JLabel jlPoly ;
 	private JLabel jlSexe ;
 			
+	private JPopupMenu popUp ; 
+	
 	public Panneau(){
 	  		
 		this.setBackground(Color.WHITE);
@@ -71,6 +90,7 @@ public class Panneau extends JPanel{
 		String fichier = "C:\\Users\\Maryline\\Documents\\Cours_IRM4\\POO\\Projet_Jeux\\Logo_PolySims2.png";
 		String fichier2 = "C:\\Users\\Maryline\\Documents\\Cours_IRM4\\POO\\Projet_Jeux\\Sims4.png";
 		String fichier3 = "C:\\Users\\Maryline\\Documents\\Cours_IRM4\\POO\\Projet_Jeux\\Bienvenue.png";
+		String fichier4 = "C:\\Users\\Maryline\\Documents\\Cours_IRM4\\POO\\Projet_Jeux\\Bravo.png";
 		//System.out.println("dans paintComponent, clic = " + clic) ;
 		if(clic == 0){
 			try {
@@ -89,7 +109,7 @@ public class Panneau extends JPanel{
 			}catch (IOException e){
 				e.printStackTrace();
 			}
-			bouton.setText("Valider");
+			
 			//Initialisation des champs de texte
 			jtfNom = new JTextField(10) ;
 			jtfPrenom = new JTextField(10) ;
@@ -158,7 +178,35 @@ public class Panneau extends JPanel{
 			DocumentListener dl = new MonDocumentListener() ;
 			jtfNom.getDocument().addDocumentListener(dl) ;
 			jtfPrenom.getDocument().addDocumentListener(dl) ;
-			jtfAge.getDocument().addDocumentListener(dl) ;
+			
+			DocumentListener dl2 = new Mon2DocumentListener() ;
+			jtfAge.getDocument().addDocumentListener(dl2) ;
+		
+			ActionListener alSexe = new SexeActionListener() ;
+			Homme.addActionListener(alSexe);
+			Femme.addActionListener(alSexe);
+			
+		}
+		else if (clic == 2){
+			try{
+				BufferedImage image4 = ImageIO.read(new File(fichier4)) ;
+				g.drawImage(image4, 400, 20, null) ;
+			}catch (IOException e){
+				e.printStackTrace();
+			}
+					
+			texte = new JTextArea();
+			texte.setBounds(300,200,500,200);
+			Font fontTexte = new Font("Tahoma", Font.PLAIN, 20) ;
+			texte.setFont(fontTexte);
+			texte.append("Votre personnage a bien été créé. \n");
+			texte.append("\nVous êtes " + genre ) ;
+			texte.append("\nVous vous appellez " + nom +" "+ prenom) ;
+			texte.append("\nVous avez " + age + " ans" );
+			texte.append("\n\nAppuyez sur le bouton Jouer pour commencer la partie !");
+			this.add(texte) ;
+		}
+		else if (clic == 3){
 			
 		}
 	}
@@ -170,25 +218,82 @@ public class Panneau extends JPanel{
 	 */
 	public class JouerAction implements ActionListener {
 		public void actionPerformed(ActionEvent e){	
-			//System.out.println("bouton activé") ;
+			if (e.getActionCommand() == "Commencer"){
 			clic = 1 ;
-			//System.out.println("dans Listener, clic = " + clic) ;
-			repaint() ;			
+			bouton.setText("Valider");
+			repaint() ;		
+			}
+			else if (e.getActionCommand() == "Valider"){
+				if (nom != "null" && prenom != "null" && age != 0 && sexe != "null" && genre != "null"){
+					clic = 2 ;
+					bouton.setText("Jouer");
+					jtfNom.setVisible(false);
+					jtfPrenom.setVisible(false);
+					jtfAge.setVisible(false);
+					jlPoly.setVisible(false);
+					jlNom.setVisible(false);
+					jlPrenom.setVisible(false);
+					jlAge.setVisible(false);
+					jlSexe.setVisible(false);
+					GenreProf.setVisible(false);
+					GenreStud.setVisible(false);
+					Homme.setVisible(false);
+					Femme.setVisible(false);		
+					
+					repaint() ;
+				}
+			}
+			else if (e.getActionCommand() == "Jouer"){
+				clic = 3 ;
+				texte.setVisible(false) ;
+				repaint () ;
+			}
 			
 		}
 	}
-
+	
+	
+	// Champs Nom et Prenom
 	public class MonDocumentListener implements DocumentListener{
 	
-		public void changedUpdate(DocumentEvent e) {}
-		public void insertUpdate(DocumentEvent e) {
-		System.out.println("Mise à jour") ;
+		public void changedUpdate(DocumentEvent de) {}
+		public void insertUpdate(DocumentEvent de) {
+			
+			polysim = new PolySims() ;
+			nom = polysim.getNom(jtfNom.getText());
+			prenom = polysim.getPrenom(jtfPrenom.getText());
 		}
-		public void removeUpdate(DocumentEvent e) {}
+		public void removeUpdate(DocumentEvent de) {}
 	}
 	
+	// Champ Age
+	public class Mon2DocumentListener implements DocumentListener{
+		
+		public void changedUpdate(DocumentEvent de) {}
+		public void insertUpdate(DocumentEvent de) {
+			age = polysim.getAge(Integer.parseInt(jtfAge.getText())) ;
+		}
+		public void removeUpdate(DocumentEvent de) {}
+	}
+	
+	// Bouton Radio genre
 	public class PolyActionListener implements ActionListener{
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent ae) {
+			genre = ae.getActionCommand() ;
+			if( genre == "PolyProf"){
+				polyprof = new PolyProf() ;
+			}
+			else if (genre == "PolyStud"){
+				polystud = new PolyStud() ;
+			}
 		}
 	}
+	
+	// Bouton radio sexe
+	public class SexeActionListener implements ActionListener{
+		public void actionPerformed(ActionEvent ae) {
+			sexe = ae.getActionCommand() ;
+		}
+	}
+	
 }
