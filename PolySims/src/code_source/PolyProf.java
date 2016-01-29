@@ -3,9 +3,9 @@ package code_source;
 public class PolyProf extends PolySims{
 	
 	// Ce qui définit un PolyProf
-	private String matiere_enseignée ;
-		
-	
+	protected String matiere_enseignée ;
+
+		 
 	/**
 	 * Fonction corrigerCopies -> 1h , -10 energie  , +5 travail
 	 */

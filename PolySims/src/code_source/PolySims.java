@@ -25,13 +25,8 @@ public class PolySims {
 	//Le temps
 	protected int heure ;
 	protected int minute ;
-	
-	/**
-	 * Constructeur
-	 */
+
 	public PolySims(){
-		
-		
 		jauge_energie = 100 ;
 		jauge_hygiene = 100 ;
 		jauge_besoins = 100 ;
@@ -41,31 +36,42 @@ public class PolySims {
 		heure = 7 ;
 		minute = 40 ;
 		lieu = "Maison" ;
-	/*	System.out.println(" jauge_energie = " + jauge_energie + 
-								"\n jauge_hygiene = " + jauge_hygiene + 
-								"\n jauge_besoins = " + jauge_besoins +
-								"\n jauge_appetit = " + jauge_appetit +
-								"\n jauge_sociale = " + jauge_sociale +
-								"\n jauge_travail = " + jauge_travail);
-			System.out.println("il est " + heure+"h"+minute) ;
-	*/
 	}
-	
 	
 	public String getNom (String nom2){
 		nom = nom2 ;
 		return nom ;
-	}
-	
+	}	 	
 	public String getPrenom (String prenom2){
 		prenom = prenom2 ;
 		return prenom ;
+ 	}	 	
+	public int getAge (int age2){
+ 		age = age2 ;
+ 		return age ;
+  	}
+	
+	public int getAp(){
+		return jauge_appetit ;
+	}
+	public int getEn(){
+		return jauge_energie ;
+	}
+	public int getBe(){
+		return jauge_besoins ;
+	}
+	public int getHy(){
+		return jauge_hygiene ;
+	}
+	public int getSo(){
+		return jauge_sociale ;
+	}
+	public int getTr(){
+		return jauge_travail ;
 	}
 	
-	public int getAge (int age2){
-		age = age2 ;
-		return age ;
-	}
+	
+	
 	
 	
 	

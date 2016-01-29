@@ -5,6 +5,10 @@ public class PolyStud extends PolySims{
 	// Ce qui définit un PolyProf
 	private String filiere ;
 	
+	public PolyStud(){
+	
+	}
+	
 	/**
 	 * Faire ses devoirs ->  1h , -10 energie  , +5 travail
 	 */
