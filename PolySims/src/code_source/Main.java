@@ -7,11 +7,11 @@ import graphisme.Fenetre;
 public class Main {
 
 	public static void main(String[] args){
-
-		Fenetre fenetre = new Fenetre("Les PolySims (TM) ", 10, 10, 1300, 700) ;
+		PolyStud lola = new PolyStud() ;
+		lola.dormir() ;
+		lola.seDeplacer("ecole") ;
+		//lola.manger("boisson");
 		
-		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		fenetre.setVisible(true);
-			
+		
 	}
 }

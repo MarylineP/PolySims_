@@ -1,26 +1,33 @@
 package code_source;
 
-public class PolyStud extends PolySims{
+public class PolyStud extends PolySimsAbstract{
 
 	// Ce qui définit un PolyProf
 	private String filiere ;
 	
-	public PolyStud(){
-	
+	/** ASSISTER A UN COURS **/
+	public void aller_travailler_spe(){ 
+		System.out.println("Votre PolySim va en cours");
+		heure = heure + 4 ;
+		jauge_travail = jauge_travail + 2 ;
+		jauge_energie = jauge_energie - 20 ;
+		jauge_appetit = jauge_appetit - 40 ;
 	}
 	
-	/**
-	 * Faire ses devoirs ->  1h , -10 energie  , +5 travail
-	 */
-	public void FaireDevoirs(){
-		if (jauge_energie>10 && lieu == "Maison") {
-			jauge_energie = jauge_energie - 10 ;
-			jauge_travail = jauge_travail + 5 ; 
+	/** FAIRE SES DEVOIRS **/
+	public void travailler_spe(){ 
+		System.out.println("Votre PolySim fait ses devoirs");
+		heure = heure + 1 ;
+		jauge_travail = jauge_travail + 5 ;
+		jauge_energie = jauge_energie - 10 ;
+	}
+	
+	/** S'IMPLIQUER DANS UN CLUB **/
+	public void implication_club(){
+		if(verifier.verif_implication_club()){
+			System.out.println("Votre PolySim va à son club");
 			heure = heure + 1 ;
-			System.out.println(" Vous avez fait vos devoirs. \n Votre jauge de Travail est à "+ jauge_travail + " et votre energie est de " + jauge_energie) ;
-			System.out.println("Il est " + heure +"h"+minute) ;
+			jauge_sociale = jauge_sociale + 30 ;
 		}
-		else
-			System.out.println("Vous n'avez pas assez d'énergie pour faire vos devoirs. Votre jauge n'est qu'à " + jauge_energie + "\n Il faut dormir") ;
 	}
 }
