@@ -47,7 +47,8 @@ public class Panneau2 extends JPanel{
 	private HGbma hGbma ;
 
 	//Champs de texte creation Sims
-	private JTextArea texte ;
+	private JTextArea texte = new JTextArea();
+	private Font fontTexte = new Font("Tahoma", Font.PLAIN, 20) ;
 	
 	//Récuperer valeur champs
 	private String nomP ;
@@ -62,71 +63,71 @@ public class Panneau2 extends JPanel{
 	private int clic ;
 	
 	//Boutons radios 
-	private JRadioButton genreProf;
-	private JRadioButton genreStud;
-	private JRadioButton itemInfo ;
-	private JRadioButton itemGbma ;
-	private JRadioButton homme ;
-	private JRadioButton femme ;
-	
+	private JRadioButton genreProf = new JRadioButton("PolyProf");
+	private JRadioButton genreStud = new JRadioButton ("PolyStud");
+	private JRadioButton itemInfo  = new JRadioButton("Info") ;
+	private JRadioButton itemGbma   = new JRadioButton("Gbma");
+	private JRadioButton homme = new JRadioButton("H");
+	private JRadioButton femme  = new JRadioButton("F");
+		
 	//Groupes boutons radios
-	private ButtonGroup groupePoly;
-	private ButtonGroup groupeSexe ;
-	private ButtonGroup groupeFiliere ;
-	
+	private ButtonGroup groupePoly = new ButtonGroup() ;
+	private ButtonGroup groupeSexe = new ButtonGroup() ;
+	private ButtonGroup groupeFiliere = new ButtonGroup() ;
+		
 	//Champs de texte
-	private JTextField jtfNom  ;
-	private JTextField jtfPrenom ;
-	private JTextField jtfAge ;
+	private JTextField jtfNom  = new JTextField(10) ;
+	private JTextField jtfPrenom  = new JTextField(10) ;
+	private JTextField jtfAge  = new JTextField(2);
 	
 	//Noms des champs de texte
-	private JLabel jlNom ;
-	private JLabel jlPrenom ;
-	private JLabel jlAge ;
-	private JLabel jlPoly ;
-	private JLabel jlSexe ;
+	private JLabel jlNom = new JLabel("Nom :") ;
+	private JLabel jlPrenom = new JLabel("Prénom :") ;
+	private JLabel jlAge = new JLabel("Âge :") ;
+	private JLabel jlPoly = new JLabel("Vous êtes un :");
+	private JLabel jlSexe = new JLabel("Sexe : ") ;
+		
 	
 	//PopUp pour choix filiere 
-	private JPopupMenu popUpFiliere  ;
-	private JPopupMenu popUpDeplacer ;
+	private JPopupMenu popUpFiliere= new JPopupMenu();  
 	
 // Attributs pour le jeu 
 	
 	// Texte 
-	private JTextArea desc ;		//Description personnage sous image 
-	private JTextArea question ;	//Question pour action
-	
-	// Objet Temps
-	private boolean timeP = false ;
-	private Temps chrono ;	
+	private JTextArea desc = new JTextArea() ;		//Description personnage sous image 
+	private JTextArea question = new JTextArea() ;
+	private Font fontTexteQ = new Font("Tahoma", Font.PLAIN, 25) ;	//Question pour action
 	
 	//Bouton pour réaliser des actoins
-	private JButton boutonDormir ;
-	private JButton boutonDoucher ;
-	private JButton boutonBesoin ;
-	private JButton boutonCommuniquer ;
+	private JButton boutonDormir = new JButton("Dormir");
+	private JButton boutonDoucher= new JButton("Se doucher")  ;
+	private JButton boutonBesoin  = new JButton("Aller au toilette");
+	private JButton boutonCommuniquer= new JButton("Communiquer") ; ;
 	private JButton boutonCommuniquerRigoler ;
 	private JButton boutonCommuniquerParler ;
 	private JButton boutonCommuniquerCritiquer ;
 	private JButton boutonCommuniquerEngueuler ;
 	private JButton boutonCommuniquerReproduire ;
-	private JButton boutonManger ;
+	private JButton boutonManger  = new JButton("Manger") ;
 	private JButton boutonMangerBoisson ;
 	private JButton boutonMangerGouter ;
 	private JButton boutonMangerRepas ;
-	private JButton boutonDeplacer ;
-	private JButton boutonDeplacerEcole ;
-	private JButton boutonDeplacerSoiree ;
+	private JButton boutonDeplacer = new JButton("Se déplacer") ;
+	private JButton boutonDeplacerEcole = new JButton("Ecole");
+	private JButton boutonDeplacerSoiree = new JButton("Soirée") ;
 	private JButton boutonDeplacerMaison ;
 	private JButton boutonAllerCours ;
-	private JButton boutonAllerTravailler ;
+	private JButton boutonAllerTravailler= new JButton("Aller travailler") ;
 	private JButton boutonFaireDevoirs ;
-	private JButton boutonCorrigerCopies ;
+	private JButton boutonCorrigerCopies  = new JButton("Corriger copies");
 	private JButton boutonImpliquerClubPolyHack ;
 	private JButton boutonImpliquerClubPompom ;
-	private JButton boutonRaser ;
+	private JButton boutonRaser = new JButton("Se raser") ; ;
 	private JButton boutonMaquiller ;
 	private JButton boutonTomberEnceinte ;
+
+	private JTextArea jaugeHProf = new JTextArea () ;
+	
 	
 	
 	public Panneau2(){
@@ -138,11 +139,7 @@ public class Panneau2 extends JPanel{
 		bouton.setBounds(1000,320,140,50);
 		clic = 0 ;		
 	}
-	
-	
-	public boolean getTime(){
-		return timeP ;
-	}
+
 	public int getClicP(){
 		return clic ;
 	}
@@ -162,21 +159,9 @@ public class Panneau2 extends JPanel{
 				e.printStackTrace();
 			}
 			
-			//Initialisation des champs de texte
-			jtfNom = new JTextField(10) ;
-			jtfPrenom = new JTextField(10) ;
-			jtfAge = new JTextField(2) ;
-		
 			jtfNom.setBounds(250, 240, 100, 22);
 			jtfPrenom.setBounds(250, 280, 100, 22);
 			jtfAge.setBounds(250, 320, 30, 22);
-			
-			//Initialisation des Labels
-			jlPoly = new JLabel("Vous êtes un :");
-			jlNom = new JLabel("Nom :") ;
-			jlPrenom = new JLabel("Prénom :") ;
-			jlAge = new JLabel("Âge :") ;
-			jlSexe = new JLabel("Sexe : ") ;
 			
 			jlPoly.setBounds(150, 200, 100, 22);
 			jlNom.setBounds(150, 240, 40 ,22);
@@ -184,28 +169,14 @@ public class Panneau2 extends JPanel{
 			jlAge.setBounds(150, 320, 40 ,22);
 			jlSexe.setBounds(150, 360, 40, 22) ;
 			
-			//Initialisation bouton radio (un choix unique)
-			genreProf = new JRadioButton("PolyProf");
-			genreStud = new JRadioButton ("PolyStud") ;
-			itemInfo = new JRadioButton("Info");
-			itemGbma = new JRadioButton("Gbma");
-			homme = new JRadioButton("H");
-			femme = new JRadioButton("F");
-			
 			genreProf.setBounds(250, 200, 100 ,22);
 			genreStud.setBounds(350, 200, 100 ,22);
 			homme.setBounds(250, 360, 40, 22) ;
 			femme.setBounds(300, 360, 40, 22);
 			
 			//Initialisation de la popUp filiere
-			popUpFiliere = new JPopupMenu();
 			popUpFiliere.add(itemInfo, BorderLayout.EAST);
 			popUpFiliere.add(itemGbma, BorderLayout.WEST) ;
-			
-			//Initialisation groupe de bouton pour determiner le choix unique
-			groupePoly = new ButtonGroup() ;
-			groupeFiliere = new ButtonGroup() ;
-			groupeSexe = new ButtonGroup() ;
 	
 			//Ajout des boutons au groupe
 			groupePoly.add(genreProf);
@@ -221,11 +192,9 @@ public class Panneau2 extends JPanel{
 			this.add(jlPrenom) ;
 			this.add(jlAge) ;
 			this.add(jlSexe) ;
-			
 			this.add(jtfNom) ;
 			this.add(jtfPrenom) ;
 			this.add(jtfAge) ;
-			
 			this.add(genreProf) ;
 			this.add(genreStud) ;
 			this.add(homme) ;
@@ -261,9 +230,8 @@ public class Panneau2 extends JPanel{
 				e.printStackTrace();
 			}
 					
-			texte = new JTextArea();
+		
 			texte.setBounds(300,250,500,200);
-			Font fontTexte = new Font("Tahoma", Font.PLAIN, 20) ;
 			texte.setFont(fontTexte);
 			texte.append("Votre personnage a bien été créé. \n");
 			texte.append("\nVous êtes " + genre ) ;
@@ -296,30 +264,16 @@ public class Panneau2 extends JPanel{
 			}
 			
 			//Affichage nom + Prénom + Age sous la photo
-			desc = new JTextArea() ;
 			desc.setBounds(100, 480, 200, 200) ;
-			desc.append(nomP + " " + prenomP + "\n" ) ;
-			desc.append(genre + " - " + ageP + " ans");
+			desc.setText(nomP + " " + prenomP + "\n" + genre + " - " + ageP + " ans");
 			this.add(desc) ;		
 			
 			// Phrase "Que voulez-vous faire ?"
-			question = new JTextArea() ;
-			Font fontTexteQ = new Font("Tahoma", Font.PLAIN, 25) ;
 			question.setFont(fontTexteQ);
 			question.setBounds(400, 180, 300, 50) ;
-			question.append("Que voulez-vous faire ?") ;
+			question.setText("Que voulez-vous faire ?") ;
 			this.add(question) ;	
 			
-			//Affichage boutons actions commun
-			boutonDormir = new JButton("Dormir") ;
-			boutonManger = new JButton("Manger") ;
-			boutonCommuniquer = new JButton("Communiquer") ;
-			boutonBesoin = new JButton("Aller au toilette") ;
-			boutonDoucher = new JButton("Se doucher") ;
-			boutonDeplacer = new JButton("Se déplacer") ;
-			boutonDeplacerEcole = new JButton("Ecole") ;
-			boutonDeplacerSoiree = new JButton("Soirée") ;
-						
 			boutonDormir.setBounds(400,240,140,30);
 			boutonBesoin.setBounds(400,280,140,30);
 			boutonDoucher.setBounds(400,320,140,30);
@@ -327,7 +281,6 @@ public class Panneau2 extends JPanel{
 			boutonDeplacer.setBounds(550,280,140,30);
 			boutonDeplacerEcole.setBounds(700,280,140,30);
 			boutonDeplacerSoiree.setBounds(850,280,140,30);
-			
 			
 			this.add(boutonDormir) ;
 			this.add(boutonManger) ;
@@ -359,9 +312,7 @@ public class Panneau2 extends JPanel{
 			
 			if(genre == "PolyProf" ){	
 				//Affichage boutons pour prof
-				boutonAllerTravailler = new JButton("Aller travailler") ;
-				boutonCorrigerCopies = new JButton("Corriger copies") ;
-				
+								
 				//this.add(boutonAllerTravailler) ;
 				this.add(boutonCorrigerCopies) ;
 				
@@ -380,9 +331,15 @@ public class Panneau2 extends JPanel{
 					}catch (IOException e){
 						e.printStackTrace();
 					}
+			
 					
+					jaugeHProf.setText("Energie : "+ hProf.getEn() +"    Hygiene :"+ hProf.getHy() +"    Besoins :"+ hProf.getBe()+
+					"    Appetit :"+hProf.getAp()+"   Social: "+hProf.getSo()+"    Travail :"+hProf.getTr());
+					add(jaugeHProf) ;
+					jaugeHProf.setBounds(450, 600, 600, 100);
+
+										
 					//Affichage boutons actions pour prof homme
-					boutonRaser = new JButton("Se raser") ;
 					boutonRaser.setBounds(400,400,140,30);
 					this.add(boutonRaser) ;
 											
@@ -577,34 +534,27 @@ public class Panneau2 extends JPanel{
 				if (dorae.getActionCommand() == "Dormir"){
 					if (genre == "PolyProf" && sexe == "H"){
 						hProf.dormir();
-						add( hProf.getJaugesDormir() ) ;
-						hProf.getJaugesDormir().setVisible(true);
-						hProf.getJaugesDormir().setBounds(450, 600, 600, 100);
-				}
+						repaint() ;
+					}
 					else if (genre == "PolyProf" && sexe == "F"){
 						fProf.dormir();
-						add( fProf.getJaugesDormir() ) ;
-						fProf.getJaugesDormir().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyStud" && filiere == "Info" && sexe == "H"){
 						hInfo.dormir();
-						add( hInfo.getJaugesDormir() ) ;
-						hInfo.getJaugesDormir().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyStud" && filiere == "Info" && sexe == "F"){
 						fInfo.dormir();
-						add( fInfo.getJaugesDormir() ) ;
-						fInfo.getJaugesDormir().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyStud" && filiere == "Gbma" && sexe == "H"){
 						hGbma.dormir();
-						add( hGbma.getJaugesDormir() ) ;
-						hGbma.getJaugesDormir().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyStud" && filiere == "Gbma" && sexe == "F"){
 						fGbma.dormir();
-						add( fGbma.getJaugesDormir() ) ;
-						fGbma.getJaugesDormir().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 				}
 			}
@@ -622,34 +572,27 @@ public class Panneau2 extends JPanel{
 				if (besae.getActionCommand() == "Aller au toilette"){
 					if (genre == "PolyProf" && sexe == "H"){
 						hProf.allerToilette();
-						add( hProf.getJaugesBesoin() ) ;
-						hProf.getJaugesBesoin().setVisible(true);
-						hProf.getJaugesBesoin().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyProf" && sexe == "F"){
 						fProf.allerToilette();
-						add( fProf.getJaugesBesoin() ) ;
-						fProf.getJaugesBesoin().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyStud" && filiere == "Info" && sexe == "H"){
 						hInfo.allerToilette();
-						add( hInfo.getJaugesBesoin() ) ;
-						hInfo.getJaugesBesoin().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyStud" && filiere == "Info" && sexe == "F"){
 						fInfo.allerToilette();
-						add( fInfo.getJaugesBesoin() ) ;
-						fInfo.getJaugesBesoin().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyStud" && filiere == "Gbma" && sexe == "H"){
 						hGbma.allerToilette();
-						add( hGbma.getJaugesBesoin() ) ;
-						hGbma.getJaugesBesoin().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyStud" && filiere == "Gbma" && sexe == "F"){
 						fGbma.allerToilette();
-						add( fGbma.getJaugesBesoin() ) ;
-						fGbma.getJaugesBesoin().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 				}
 			}
@@ -661,34 +604,27 @@ public class Panneau2 extends JPanel{
 				if (douae.getActionCommand() == "Se doucher"){
 					if (genre == "PolyProf" && sexe == "H"){
 						hProf.seDoucher();
-						add( hProf.getJaugesDoucher() ) ;
-						hProf.getJaugesDoucher().setVisible(true);
-						hProf.getJaugesDoucher().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyProf" && sexe == "F"){
 						fProf.seDoucher();
-						add( fProf.getJaugesDoucher() ) ;
-						fProf.getJaugesDoucher().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyStud" && filiere == "Info" && sexe == "H"){
 						hInfo.seDoucher();
-						add( hInfo.getJaugesDoucher() ) ;
-						hInfo.getJaugesDoucher().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyStud" && filiere == "Info" && sexe == "F"){
 						fInfo.seDoucher();
-						add( fInfo.getJaugesDoucher() ) ;
-						fInfo.getJaugesDoucher().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyStud" && filiere == "Gbma" && sexe == "H"){
 						hGbma.seDoucher();
-						add( hGbma.getJaugesDoucher() ) ;
-						hGbma.getJaugesDoucher().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyStud" && filiere == "Gbma" && sexe == "F"){
 						fGbma.seDoucher();
-						add( fGbma.getJaugesDoucher() ) ;
-						fGbma.getJaugesDoucher().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 				}
 			}
@@ -699,17 +635,10 @@ public class Panneau2 extends JPanel{
 				public void actionPerformed(ActionEvent depae) {
 					String deplacerAE ;
 					deplacerAE = depae.getActionCommand() ;
-					if( deplacerAE != "Se déplacer") {
-						boutonDeplacerEcole.setVisible(false);
-						boutonDeplacerSoiree.setVisible(false);
-					}
-					else {
-						System.out.println("else") ;
+					if( boutonDeplacer.isSelected() == true) {
 						boutonDeplacerEcole.setVisible(true);
 						boutonDeplacerSoiree.setVisible(true);
-					}
-				System.out.println(boutonDeplacerSoiree.isVisible()) ;
-						
+					}						
 				}
 			}
 			
@@ -719,18 +648,15 @@ public class Panneau2 extends JPanel{
 				if (rasae.getActionCommand() == "Se raser"){
 					if(genre == "PolyProf" && sexe=="H"){
 						hProf.seRaser();
-						add( hProf.getJaugesRaser() ) ;
-						hProf.getJaugesRaser().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 				else if (genre == "PolyStud" && filiere == "Info" && sexe == "H"){
 						hInfo.seRaser();
-						add( hInfo.getJaugesRaser() ) ;
-						hInfo.getJaugesRaser().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					else if (genre == "PolyStud" && filiere == "Gbma" && sexe == "H"){
 						hGbma.seRaser();
-						add( hGbma.getJaugesRaser() ) ;
-						hGbma.getJaugesRaser().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 				}
 			}
@@ -742,8 +668,7 @@ public class Panneau2 extends JPanel{
 				if (travae.getActionCommand() == "Aller travailler"){
 					if (genre == "PolyProf" && sexe == "H"){
 						hProf.allerTravailler();
-						//add( hProf.getJaugesDoucher() ) ;
-						//hProf.getJaugesDoucher().setBounds(450, 600, 600, 100);
+						repaint() ;
 					}
 					//else if (genre == "PolyStud" && filiere == "Info" && sexe == "H")
 				}
