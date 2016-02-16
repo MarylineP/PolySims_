@@ -74,6 +74,11 @@ public abstract class PolySims implements Verifier {
 	public String get_lieu(){
 		return lieu ;
 	}
+	//Setter lieu
+	public void set_lieu (String lieu2){
+		lieu=lieu2 ;
+	}
+	
 	//Getter temps
 	public int get_heure(){
 		return heure ;
@@ -100,29 +105,6 @@ public abstract class PolySims implements Verifier {
 	}
 	public int getTr(){
 		return jauge_travail ;
-	}
-	
-	//Getter toutes les jauges apres une action
-	public JTextArea getJaugesDormir(){
-		return jaugesDormir ;
-	}
-	public JTextArea getJaugesManger(){
-		return jaugesManger ;
-	}
-	public JTextArea getJaugesDoucher(){
-		return jaugesDoucher ;
-	}
-	public JTextArea getJaugesBesoin(){
-		return jaugesBesoin ;
-	}
-	public JTextArea getJaugesDeplacer(){
-		return jaugesDeplacer ;
-	}
-	public JTextArea getJaugesTravailler(){
-		return jaugesTravailler ;
-	}
-	public JTextArea getJaugesALlerTravailler(){
-		return jaugesAllerTravailler ;
 	}
 	
 	
@@ -344,11 +326,7 @@ public abstract class PolySims implements Verifier {
 			return true ;
 		else return false ;
 	}
-	public boolean verif_faire_devoirs() {
-		if ((this.getEn() > 10) && (this.get_lieu() == "maison"))
-			return true ;
-		else return false ;
-	}
+
 	public boolean verif_implication_club() {
 		if((this.get_heure() <= 23) && (this.get_heure() >= 18))
 			return true ;

@@ -9,6 +9,7 @@ import homme.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -19,6 +20,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
@@ -37,8 +39,48 @@ import javax.swing.event.DocumentListener;
 public class Panneau2 extends JPanel{
 // Attibut pour la mise en route du jeu 
 	
+	//Bouton 
+	private JButton bouton = new JButton ("Valider") ;
+	private int clic ;
+	
+	//Boutons radios 
+	private JRadioButton genreProf = new JRadioButton("PolyProf");
+	private JRadioButton genreStud = new JRadioButton ("PolyStud");
+	private JRadioButton itemInfo  = new JRadioButton("Info") ;
+	private JRadioButton itemGbma   = new JRadioButton("Gbma");
+	private JRadioButton homme = new JRadioButton("H");
+	private JRadioButton femme  = new JRadioButton("F");
+		
+	//Groupes boutons radios
+	private ButtonGroup groupePoly = new ButtonGroup() ;
+	private ButtonGroup groupeSexe = new ButtonGroup() ;
+	private ButtonGroup groupeFiliere = new ButtonGroup() ;
+	private ButtonGroup groupeDeplacer = new ButtonGroup () ;
+		
+	//Champs de texte
+	private JTextField jtfNom  = new JTextField(10) ;
+	private JTextField jtfPrenom  = new JTextField(10) ;
+	private JTextField jtfAge  = new JTextField(2);
+	
+	//Noms des champs de texte
+	private JLabel jlNom = new JLabel("Nom :") ;
+	private JLabel jlPrenom = new JLabel("Prénom :") ;
+	private JLabel jlAge = new JLabel("Âge :") ;
+	private JLabel jlPoly = new JLabel("Vous êtes un :");
+	private JLabel jlSexe = new JLabel("Sexe : ") ;
+		
+	
+	//PopUp pour choix filiere 
+	private JPopupMenu popUpFiliere= new JPopupMenu();  
+	
+	//Listener du formulaire
+	private ActionListener alPoly = new PolyActionListener() ;
+	private ActionListener alFiliere = new FiliereActionListener() ;
+	private DocumentListener dl = new MonDocumentListener() ;
+	private DocumentListener dl2 = new Mon2DocumentListener() ;
+	private ActionListener alSexe = new SexeActionListener() ;
+	
 	//création des polysims
-
 	private HProf hProf ;
 	private FProf fProf ;
 	private FInfo fInfo ;
@@ -58,38 +100,7 @@ public class Panneau2 extends JPanel{
 	private String sexe ;
 	private String filiere ;
 	
-	//Bouton 
-	private JButton bouton = new JButton ("Valider") ;
-	private int clic ;
 	
-	//Boutons radios 
-	private JRadioButton genreProf = new JRadioButton("PolyProf");
-	private JRadioButton genreStud = new JRadioButton ("PolyStud");
-	private JRadioButton itemInfo  = new JRadioButton("Info") ;
-	private JRadioButton itemGbma   = new JRadioButton("Gbma");
-	private JRadioButton homme = new JRadioButton("H");
-	private JRadioButton femme  = new JRadioButton("F");
-		
-	//Groupes boutons radios
-	private ButtonGroup groupePoly = new ButtonGroup() ;
-	private ButtonGroup groupeSexe = new ButtonGroup() ;
-	private ButtonGroup groupeFiliere = new ButtonGroup() ;
-		
-	//Champs de texte
-	private JTextField jtfNom  = new JTextField(10) ;
-	private JTextField jtfPrenom  = new JTextField(10) ;
-	private JTextField jtfAge  = new JTextField(2);
-	
-	//Noms des champs de texte
-	private JLabel jlNom = new JLabel("Nom :") ;
-	private JLabel jlPrenom = new JLabel("Prénom :") ;
-	private JLabel jlAge = new JLabel("Âge :") ;
-	private JLabel jlPoly = new JLabel("Vous êtes un :");
-	private JLabel jlSexe = new JLabel("Sexe : ") ;
-		
-	
-	//PopUp pour choix filiere 
-	private JPopupMenu popUpFiliere= new JPopupMenu();  
 	
 // Attributs pour le jeu 
 	
@@ -112,22 +123,30 @@ public class Panneau2 extends JPanel{
 	private JButton boutonMangerBoisson ;
 	private JButton boutonMangerGouter ;
 	private JButton boutonMangerRepas ;
-	private JButton boutonDeplacer = new JButton("Se déplacer") ;
+	private JButton boutonDeplacer = new JButton("Se déplacer");
 	private JButton boutonDeplacerEcole = new JButton("Ecole");
 	private JButton boutonDeplacerSoiree = new JButton("Soirée") ;
 	private JButton boutonDeplacerMaison ;
-	private JButton boutonAllerCours ;
-	private JButton boutonAllerTravailler= new JButton("Aller travailler") ;
-	private JButton boutonFaireDevoirs ;
+	private JButton boutonAllerCours = new JButton ("Aller en cours") ;
+	private JButton boutonAllerTravailler= new JButton("Donner des cours") ;
+	private JButton boutonFaireDevoirs = new JButton ("Faire devoirs");
 	private JButton boutonCorrigerCopies  = new JButton("Corriger copies");
-	private JButton boutonImpliquerClubPolyHack ;
-	private JButton boutonImpliquerClubPompom ;
+	private JButton boutonImpliquerClubPolyHack = new JButton ("Aider PolyHack");
+	private JButton boutonImpliquerClubPompom = new JButton ("S'impliquer au \n club Pompom ");
 	private JButton boutonRaser = new JButton("Se raser") ; ;
-	private JButton boutonMaquiller ;
-	private JButton boutonTomberEnceinte ;
+	private JButton boutonMaquiller = new JButton ("Se maquiller") ;
+	private JButton boutonTomberEnceinte = new JButton ("Tomber enceinte");
 
-	private JTextArea jaugeHProf = new JTextArea () ;
+	//Listeners des boutons Actions
+	private dormirAction dormira = new dormirAction() ;
+	private besoinAction besoina = new besoinAction() ;
+	private doucherAction douchera = new doucherAction() ;
+	private mangerAction mangera = new mangerAction() ;
+	private deplacerAction deplacera = new deplacerAction() ;
 	
+	private JTextArea jauge = new JTextArea () ;
+	private String deplacerS ;
+	private String lieu;
 	
 	
 	public Panneau2(){
@@ -201,23 +220,14 @@ public class Panneau2 extends JPanel{
 			this.add(femme) ;
 			this.add(popUpFiliere) ;
 			
-			//Listener
-			ActionListener alPoly = new PolyActionListener() ;
+			//AJout des Listeners aux champs du formulaire
 			genreProf.addActionListener(alPoly);
 			genreStud.addActionListener(alPoly) ;
-			
-			ActionListener alFiliere = new FiliereActionListener() ;
 			itemInfo.addActionListener(alFiliere);
 			itemGbma.addActionListener(alFiliere);
-		
-			DocumentListener dl = new MonDocumentListener() ;
 			jtfNom.getDocument().addDocumentListener(dl) ;
 			jtfPrenom.getDocument().addDocumentListener(dl) ;
-			
-			DocumentListener dl2 = new Mon2DocumentListener() ;
 			jtfAge.getDocument().addDocumentListener(dl2) ;
-		
-			ActionListener alSexe = new SexeActionListener() ;
 			homme.addActionListener(alSexe);
 			femme.addActionListener(alSexe);
 			
@@ -229,8 +239,6 @@ public class Panneau2 extends JPanel{
 			}catch (IOException e){
 				e.printStackTrace();
 			}
-					
-		
 			texte.setBounds(300,250,500,200);
 			texte.setFont(fontTexte);
 			texte.append("Votre personnage a bien été créé. \n");
@@ -238,31 +246,11 @@ public class Panneau2 extends JPanel{
 			texte.append("\nVous vous appellez " + nomP +" "+ prenomP) ;
 			texte.append("\nVous avez " + ageP + " ans" );
 			texte.append("\n\nAppuyez sur le bouton Jouer pour commencer la partie !");
-			this.add(texte) ;
-			
+			this.add(texte) ;	
 		}
 		
 		//Clic sur commencer
-		else if (clic == 2){
-			
-			//Affichage titre 
-			String maison = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\maison.png";
-			try {
-				BufferedImage texteMaison = ImageIO.read(new File(maison)) ;
-				g.drawImage(texteMaison, 500, 20, null) ;
-			}catch (IOException e){
-				e.printStackTrace();
-			}
-			
-			//Affichage icone
-			String iconeMaison = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\icone_maison.png";
-			try {
-				BufferedImage iconeM = ImageIO.read(new File(iconeMaison)) ;
-				g.drawImage(iconeM, 800, 25, null) ;
-			}catch (IOException e){
-				e.printStackTrace();
-			}
-			
+		else if (clic == 2 ){
 			//Affichage nom + Prénom + Age sous la photo
 			desc.setBounds(100, 480, 200, 200) ;
 			desc.setText(nomP + " " + prenomP + "\n" + genre + " - " + ageP + " ans");
@@ -272,57 +260,33 @@ public class Panneau2 extends JPanel{
 			question.setFont(fontTexteQ);
 			question.setBounds(400, 180, 300, 50) ;
 			question.setText("Que voulez-vous faire ?") ;
-			this.add(question) ;	
+			this.add(question) ;
 			
-			boutonDormir.setBounds(400,240,140,30);
 			boutonBesoin.setBounds(400,280,140,30);
-			boutonDoucher.setBounds(400,320,140,30);
 			boutonManger.setBounds(550,240,140,30);
 			boutonDeplacer.setBounds(550,280,140,30);
-			boutonDeplacerEcole.setBounds(700,280,140,30);
-			boutonDeplacerSoiree.setBounds(850,280,140,30);
 			
-			this.add(boutonDormir) ;
-			this.add(boutonManger) ;
-			this.add(boutonBesoin) ;
-			this.add(boutonDoucher) ;
-			this.add(boutonDeplacer) ;
-			this.add(boutonDeplacerEcole) ;
-			this.add(boutonDeplacerSoiree) ;		
+			add(boutonManger) ;
+			add(boutonBesoin) ;
+			add(boutonDeplacer) ;
 			
-			boutonDeplacerEcole.setVisible(false);
-			boutonDeplacerSoiree.setVisible(false);
-			
-			dormirAction dormira = new dormirAction() ;
-			besoinAction besoina = new besoinAction() ;
-			doucherAction douchera = new doucherAction() ;
-			mangerAction mangera = new mangerAction() ;
-			deplacerAction deplacera = new deplacerAction() ;
-			
-			boutonDormir.addActionListener(dormira) ;
-			boutonDormir.addActionListener(deplacera) ;
-			boutonBesoin.addActionListener(besoina) ;
-			boutonBesoin.addActionListener(deplacera) ;
-			boutonDoucher.addActionListener(douchera) ;
-			boutonDoucher.addActionListener(deplacera) ;
+			//Ajout des listeners aux boutons action dans Maison
 			boutonManger.addActionListener(mangera) ;
 			boutonManger.addActionListener(deplacera) ;
 			boutonDeplacer.addActionListener(deplacera) ;
-					
+			boutonBesoin.addActionListener(besoina) ;
+			boutonBesoin.addActionListener(deplacera) ;
+			
+			if( deplacerS !="Se déplacer") {
+				boutonDeplacerSoiree.setVisible(false);
+				boutonDeplacerEcole.setVisible(false);
+			}
+			else if (deplacerS == "Se déplacer"){
+				boutonDeplacerSoiree.setVisible(true);
+				boutonDeplacerEcole.setVisible(true);
+			}
 			
 			if(genre == "PolyProf" ){	
-				//Affichage boutons pour prof
-								
-				//this.add(boutonAllerTravailler) ;
-				this.add(boutonCorrigerCopies) ;
-				
-				/*allerTravaillerAction allerTrava = new allerTravaillerAction() ;
-				boutonAllerTravailler.addActionListener(allerTrava) ;
-				boutonAllerTravailler.setBounds(400,280,140,30);
-				*/
-				corrigerCopiesAction corrigerCopiesa = new corrigerCopiesAction() ;
-				boutonCorrigerCopies.addActionListener(corrigerCopiesa) ;
-				boutonCorrigerCopies.setBounds(400,360,140,30);
 				if (sexe == "H" ){	
 					String fichierProfH = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\ProfH.png";
 					try {
@@ -331,21 +295,8 @@ public class Panneau2 extends JPanel{
 					}catch (IOException e){
 						e.printStackTrace();
 					}
-			
-					
-					jaugeHProf.setText("Energie : "+ hProf.getEn() +"    Hygiene :"+ hProf.getHy() +"    Besoins :"+ hProf.getBe()+
-					"    Appetit :"+hProf.getAp()+"   Social: "+hProf.getSo()+"    Travail :"+hProf.getTr());
-					add(jaugeHProf) ;
-					jaugeHProf.setBounds(450, 600, 600, 100);
-
-										
-					//Affichage boutons actions pour prof homme
-					boutonRaser.setBounds(400,400,140,30);
-					this.add(boutonRaser) ;
-											
-			        raserAction rasera = new raserAction() ;
-					boutonRaser.addActionListener(rasera) ;
-					
+					jauge.setText("Energie : "+ hProf.getEn() +"    Hygiene :"+ hProf.getHy() +"    Besoins :"+ hProf.getBe()+
+							"    Appetit :"+hProf.getAp()+"   Social: "+hProf.getSo()+"    Travail :"+hProf.getTr());	
 				}
 				else if (sexe == "F"){
 					String fichierProfF = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\ProfF.jpg";
@@ -355,11 +306,12 @@ public class Panneau2 extends JPanel{
 					}catch (IOException e){
 						e.printStackTrace();
 					}
+					jauge.setText("Energie : "+ fProf.getEn() +"    Hygiene :"+ fProf.getHy() +"    Besoins :"+ fProf.getBe()+
+						"    Appetit :"+fProf.getAp()+"   Social: "+fProf.getSo()+"    Travail :"+fProf.getTr());					
 				}
 			}
 			else if (genre == "PolyStud"){
-				if (filiere =="Info" ){
-					if (sexe == "H"){
+					if (filiere =="Info" && sexe == "H"){
 						String fichierInfoH = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\StudInfoH.png";
 						try {
 							BufferedImage imageInfoH = ImageIO.read(new File(fichierInfoH)) ;
@@ -367,19 +319,21 @@ public class Panneau2 extends JPanel{
 						}catch (IOException e){
 							e.printStackTrace();
 						}
+						jauge.setText("Energie : "+ hInfo.getEn() +"    Hygiene :"+ hInfo.getHy() +"    Besoins :"+ hInfo.getBe()+
+								"    Appetit :"+hInfo.getAp()+"   Social: "+hInfo.getSo()+"    Travail :"+hInfo.getTr());					
 					}
-					else if (sexe == "F"){
+					else if (filiere == "Info" &&sexe == "F"){
 						String fichierInfoF = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\StudInfoF.png";
 						try {
-							BufferedImage imageInfoF = ImageIO.read(new File(fichierInfoF)) ;
-							g.drawImage(imageInfoF, 20, 150, null) ;
+						BufferedImage imageInfoF = ImageIO.read(new File(fichierInfoF)) ;
+						g.drawImage(imageInfoF, 20, 150, null) ;
 						}catch (IOException e){
 							e.printStackTrace();
 						}
+						jauge.setText("Energie : "+ fInfo.getEn() +"    Hygiene :"+ fInfo.getHy() +"    Besoins :"+ fInfo.getBe()+
+								"    Appetit :"+fInfo.getAp()+"   Social: "+fInfo.getSo()+"    Travail :"+fInfo.getTr());					
 					}
-				}
-				else if (filiere =="Gbma"){
-					if (sexe == "H"){
+					else if (filiere =="Gbma" && sexe =="H"){
 						String fichierGbmaH = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\StudGbmaH.png";
 						try {
 							BufferedImage imageGbmaH = ImageIO.read(new File(fichierGbmaH)) ;
@@ -387,8 +341,10 @@ public class Panneau2 extends JPanel{
 						}catch (IOException e){
 							e.printStackTrace();
 						}
+						jauge.setText("Energie : "+ hGbma.getEn() +"    Hygiene :"+ hGbma.getHy() +"    Besoins :"+ hGbma.getBe()+
+								"    Appetit :"+hGbma.getAp()+"   Social: "+hGbma.getSo()+"    Travail :"+hGbma.getTr());
 					}
-					else if (sexe == "F"){
+					else if (filiere=="Gbma" && sexe == "F"){
 						String fichierGbmaF = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\StudGbmaF.png";
 						try {
 							BufferedImage imageGbmaF = ImageIO.read(new File(fichierGbmaF)) ;
@@ -396,13 +352,128 @@ public class Panneau2 extends JPanel{
 						}catch (IOException e){
 							e.printStackTrace();
 						}
+						jauge.setText("Energie : "+ fGbma.getEn() +"    Hygiene :"+ fGbma.getHy() +"    Besoins :"+ fGbma.getBe()+
+								"    Appetit :"+fGbma.getAp()+"   Social: "+fGbma.getSo()+"    Travail :"+fGbma.getTr());
 					}
+			}
+			jauge.setBounds(450, 600, 600, 100);
+			add(jauge) ;
+			
+			if (lieu=="maison"){
+				//Affichage titre 
+				String maison = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\maison.png";
+				try {
+					BufferedImage texteMaison = ImageIO.read(new File(maison)) ;
+					g.drawImage(texteMaison, 500, 20, null) ;
+				}catch (IOException e){
+					e.printStackTrace();
+				}
+				//Affichage icone
+				String iconeMaison = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\icone_maison.png";
+				try {
+					BufferedImage iconeM = ImageIO.read(new File(iconeMaison)) ;
+					g.drawImage(iconeM, 800, 25, null) ;
+				}catch (IOException e){
+					e.printStackTrace();
+				}
+			
+				boutonDormir.setBounds(400,240,140,30);
+				boutonDoucher.setBounds(400,320,140,30) ;
+				boutonDeplacerEcole.setBounds(700,280,140,30);
+				boutonDeplacerSoiree.setBounds(850,280,140,30);
+			
+				add(boutonDormir) ;
+				add(boutonDoucher) ;
+				add(boutonDeplacerEcole) ;
+				add(boutonDeplacerSoiree) ;			
+			
+			//Listener pour action bouton
+				boutonDormir.addActionListener(dormira) ;
+				boutonDormir.addActionListener(deplacera) ;
+				boutonDoucher.addActionListener(douchera) ;
+				boutonDoucher.addActionListener(deplacera) ;
+				
+			 
+				if(genre == "PolyProf" ){	
+					boutonCorrigerCopies.setBounds(550,360,140,30);
+					this.add(boutonCorrigerCopies);
+				}
+				else if (genre == "PolyStud"){
+					boutonFaireDevoirs.setBounds(550,360,140,30);
+					this.add(boutonFaireDevoirs);
+				}	
+				if (sexe == "H" ){	
+					boutonRaser.setBounds(400,360,140,30);
+					add(boutonRaser) ;
+				}
+				else if (sexe == "F"){
+					boutonMaquiller.setBounds(400,360,140,30);
+					add(boutonMaquiller) ;
+				}
+			}			
+			else if (lieu=="Maison"){
+				//Affichage titre 
+				String ecole = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\ecole.png";
+				try {
+					BufferedImage texteEcole = ImageIO.read(new File(ecole)) ;
+					g.drawImage(texteEcole, 500, 20, null) ;
+				}catch (IOException e){
+					e.printStackTrace();
+				}
+				//Affichage icone
+				String iconeEcole = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\icone_ecole.jpg";
+				try {
+					BufferedImage iconeE = ImageIO.read(new File(iconeEcole)) ;
+					g.drawImage(iconeE, 750, 25, null) ;
+				}catch (IOException e){
+					e.printStackTrace();
+				}
+
+				if(genre == "PolyProf" ){	
+					boutonAllerTravailler.setBounds(400,240,140,30);
+					add(boutonAllerTravailler) ;
+				}
+				else if (genre == "PolyStud"){
+					boutonAllerCours.setBounds(400,240,140,30);
+					add(boutonAllerCours) ;	
 				}
 			}
-		}
-		
-	}
-		
+			else if (lieu=="Maion"){
+				//Affichage titre 
+				String soiree = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\soiree.png";
+				try {
+					BufferedImage texteSoiree = ImageIO.read(new File(soiree)) ;
+					g.drawImage(texteSoiree, 500, 20, null) ;
+				}catch (IOException e){
+					e.printStackTrace();
+				}
+				//Affichage icone
+				String iconeSoiree = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\icone_soiree.jpg";
+				try {
+					BufferedImage iconeS = ImageIO.read(new File(iconeSoiree)) ;
+					g.drawImage(iconeS, 800, 25, null) ;
+				}catch (IOException e){
+					e.printStackTrace();
+				}
+			
+				boutonCommuniquer.setBounds(400,240,140,30);
+				add(boutonCommuniquer) ;
+				if (filiere == "Info"){
+					 boutonImpliquerClubPolyHack.setBounds(400,360,140,30);
+					add(boutonImpliquerClubPolyHack) ;
+				}
+				else if (filiere == "Gbma"){
+					 boutonImpliquerClubPompom.setBounds(400,360,140,30);
+					add(boutonImpliquerClubPompom) ;
+				}
+				if (sexe == "F"){
+					boutonTomberEnceinte.setBounds(400,320,140,30);
+					add(boutonTomberEnceinte) ;
+				}			
+			
+			}
+		}	
+}	
 
 	
 	/**
@@ -442,36 +513,42 @@ public class Panneau2 extends JPanel{
 					hProf.setNom(nomP) ;
 					hProf.setPrenom(prenomP) ;
 					hProf.setAge(ageP) ;
+					lieu = hProf.get_lieu() ;
 				}
 				else if (genre =="PolyProf" && sexe=="F"){
 					fProf = new FProf() ;
 					fProf.setNom(nomP) ;
 					fProf.setPrenom(prenomP) ;
 					fProf.setAge(ageP) ;
+					lieu = fProf.get_lieu() ;
 				}
 				else if (genre =="PolyStud" && filiere=="Info" && sexe=="H"){
 					hInfo = new HInfo() ;
 					hInfo.setNom(nomP) ;
 					hInfo.setPrenom(prenomP) ;
 					hInfo.setAge(ageP) ;
+					lieu = hInfo.get_lieu() ;
 				}
 				else if (genre =="PolyStud" && filiere=="Info" && sexe=="F"){
 					fInfo = new FInfo() ;
 					fInfo.setNom(nomP) ;
 					fInfo.setPrenom(prenomP) ;
 					fInfo.setAge(ageP) ;
+					lieu = fInfo.get_lieu() ;
 				}
 				else if (genre =="PolyStud" && filiere=="Gbma" && sexe=="H"){
 					hGbma = new HGbma() ;
 					hGbma.setNom(nomP) ;
 					hGbma.setPrenom(prenomP) ;
 					hGbma.setAge(ageP) ;
+					lieu = hGbma.get_lieu() ;
 				}
 				else if (genre =="PolyStud" && filiere=="Gbma" && sexe=="F"){
 					fGbma = new FGbma() ;
 					fGbma.setNom(nomP) ;
 					fGbma.setPrenom(prenomP) ;
 					fGbma.setAge(ageP) ;
+					lieu = fGbma.get_lieu() ;
 				}
 				repaint () ;	
 			}	
@@ -504,7 +581,6 @@ public class Panneau2 extends JPanel{
 			if(genre == "PolyStud"){
 				popUpFiliere.setVisible(true);
 				popUpFiliere.setLocation(480, 240);
-				popUpFiliere.setPopupSize(400, 25);
 			}
 			else 
 				popUpFiliere.setVisible(false); ;
@@ -633,12 +709,8 @@ public class Panneau2 extends JPanel{
 		// Bouton deplacer
 			public class deplacerAction implements ActionListener{
 				public void actionPerformed(ActionEvent depae) {
-					String deplacerAE ;
-					deplacerAE = depae.getActionCommand() ;
-					if( boutonDeplacer.isSelected() == true) {
-						boutonDeplacerEcole.setVisible(true);
-						boutonDeplacerSoiree.setVisible(true);
-					}						
+					deplacerS = depae.getActionCommand() ;
+					repaint() ;
 				}
 			}
 			
