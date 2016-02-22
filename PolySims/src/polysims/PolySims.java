@@ -1,7 +1,10 @@
 package polysims;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+
+import graphisme.Fenetre2;
 
 /**
  * 
@@ -10,6 +13,9 @@ import javax.swing.JTextArea;
  */
 
 public abstract class PolySims implements Verifier {
+	//Fenetre2 
+	protected Fenetre2 f2 = new Fenetre2();
+	
 	//Ce que définit un PolySim
 	protected String nom ;
 	protected String prenom ;
@@ -39,14 +45,14 @@ public abstract class PolySims implements Verifier {
 	 * Constructeur
 	 */
 	public PolySims(){
-		jauge_energie = 80 ;
-		jauge_hygiene = 80 ;
-		jauge_besoins = 80 ;
+		jauge_energie = 100 ;
+		jauge_hygiene = 100 ;
+		jauge_besoins = 100 ;
 		jauge_appetit = 100 ;
 		jauge_sociale = 80 ;
 		jauge_travail = 0 ;
 		heure = 7 ;
-		minute = 40 ;
+		minute = 30 ;
 		lieu = "maison" ;
 		enVie = true ;
 		gagne = false ;
@@ -119,7 +125,10 @@ public abstract class PolySims implements Verifier {
 				jauge_appetit = jauge_appetit - 30 ;
 			else if (jauge_appetit<30)
 				jauge_appetit = 0 ;
+			JOptionPane.showMessageDialog(f2,"Vous avez dormi 6h."+"\n"+"Vos jauges besoin et hygiène ont diminuées de 40%.","Bon réveil", JOptionPane.INFORMATION_MESSAGE);
 		}	
+		else 
+			JOptionPane.showMessageDialog(f2,"Vous ne pouvez pas dormir."+"\n"+"Vous êtes déjà en forme ou vous avez besoin de vous douchez ou d'aller au toilette.", "Dormir", JOptionPane.INFORMATION_MESSAGE);
 	}
 			
 	
@@ -132,7 +141,11 @@ public abstract class PolySims implements Verifier {
 				heure = (heure + 1)%24 ;
 			minute = (minute + 20)%60 ;
 			jauge_hygiene = 100 ;
+			JOptionPane.showMessageDialog(f2,"Vous avez mis 20 minutes pour vous doucher.", "Bonne douche", JOptionPane.INFORMATION_MESSAGE);
 		}
+		else
+			JOptionPane.showMessageDialog(f2,"Vous êtes déjà propre.", "Douche", JOptionPane.INFORMATION_MESSAGE);
+
 	}
 			
 			
@@ -145,7 +158,10 @@ public abstract class PolySims implements Verifier {
 				heure = (heure + 1)%24 ;
 			minute = (minute + 10)%60 ;
 			jauge_besoins = 100 ;
+			JOptionPane.showMessageDialog(f2,"Vous avez mis 10 minutes pour faire vos besoins.", "Soulagé", JOptionPane.INFORMATION_MESSAGE);
 		}
+		else
+			JOptionPane.showMessageDialog(f2,"Vous n'avez pas besoin d'aller au toilette.", "Toilette", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	
@@ -157,10 +173,12 @@ public abstract class PolySims implements Verifier {
 			if(minute+10 >= 60)
 				heure = (heure + 1)%24 ;
 			minute = (minute + 10)%60 ;
-			
 			if(jauge_appetit > 100)   //on ne veut pas que jauge_appetit > 100
 				jauge_appetit = 100 ;
+			JOptionPane.showMessageDialog(f2,"Vous avez mis 10 minutes pour boire de l'eau.", "Frigo", JOptionPane.INFORMATION_MESSAGE);
 		}
+		else
+			JOptionPane.showMessageDialog(f2,"Vous n'avez pas besoin de boire.", "Frigo", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	/** MANGER GOUTER **/
@@ -170,10 +188,12 @@ public abstract class PolySims implements Verifier {
 			if(minute+10 >= 60)
 				heure = (heure + 1)%24;
 			minute = (minute + 10)%60 ;
-			
 			if(jauge_appetit > 100)   //on ne veut pas que jauge_appetit > 100
 				jauge_appetit = 100 ;
+			JOptionPane.showMessageDialog(f2,"Vous avez mis 10 minutes pour goûter.", "Frigo", JOptionPane.INFORMATION_MESSAGE);
 		}
+		else
+			JOptionPane.showMessageDialog(f2,"Vous n'avez pas besoin de manger.", "Frigo", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	/** MANGER REPAS **/
@@ -183,10 +203,12 @@ public abstract class PolySims implements Verifier {
 			if(minute+20 >= 60)
 				heure = (heure + 1)%24 ;
 			minute = (minute + 20)%60 ;
-			
 			if(jauge_appetit > 100)   //on ne veut pas que jauge_appetit > 100
 				jauge_appetit = 100 ;		
+			JOptionPane.showMessageDialog(f2,"Vous avez mis 20 minutes pour manger.", "Frigo", JOptionPane.INFORMATION_MESSAGE);
 		}	
+		else
+			JOptionPane.showMessageDialog(f2,"Vous n'avez pas besoin de manger.", "Frigo", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	/** SE DEPLACER A LA MAISON **/
@@ -196,8 +218,13 @@ public abstract class PolySims implements Verifier {
 			jauge_energie = jauge_energie - 20 ;
 			if(minute + 30>= 60)
 				heure =(heure + 1)%24;
-			minute = (minute + 30)%60 ;  
+			minute = (minute + 30)%60 ;
+			if(jauge_energie < 0)   
+				jauge_energie = 0 ;
+			JOptionPane.showMessageDialog(f2,"Vous avez mis 30 minutes pour rentrer chez vous."+"\n"+"Vous avez perdu 30% d'énergie.", "Maison", JOptionPane.INFORMATION_MESSAGE);
 		}
+		else 
+			JOptionPane.showMessageDialog(f2,"Vous n'avez pas assez d'énergie pour vous déplacer.", "Se déplacer", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	/** SE DEPLACER EN SOIREE **/
@@ -207,8 +234,13 @@ public abstract class PolySims implements Verifier {
 			jauge_energie = jauge_energie - 20 ;
 			if(minute + 30>= 60)
 				heure = (heure + 1)%24 ;
-			minute = (minute + 30)%60 ;  
+			minute = (minute + 30)%60 ; 
+			if(jauge_energie < 0)   
+				jauge_energie = 0 ;
+			JOptionPane.showMessageDialog(f2,"Vous avez mis 30 minutes pour aller en soirée."+"\n"+"Vous avez perdu 30% d'énergie.", "Soirée", JOptionPane.INFORMATION_MESSAGE);
 		}
+		else 
+			JOptionPane.showMessageDialog(f2,"Vous ne pouvez vous rendre en soirée qu'à partir de 18h."+"\n"+"Reposez vous avant de partir.", "Déplacer", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	/** SE DEPLACER A L'ECOLE **/
@@ -219,17 +251,23 @@ public abstract class PolySims implements Verifier {
 				heure = (heure + 1)%24 ;
 			minute = (minute + 30)%60 ;
 			lieu = "ecole" ;
+			if(jauge_energie < 0)   
+				jauge_energie = 0 ;
+			JOptionPane.showMessageDialog(f2,"Vous avez mis 30 minutes pour aller à l'école."+"\n"+"Vous avez perdu 30% d'énergie.", "Ecole", JOptionPane.INFORMATION_MESSAGE);
 		}
+		else 
+			JOptionPane.showMessageDialog(f2,"Vous ne pouvez vous rendre à l'école qu'à partir de 7h.", "Déplacer", JOptionPane.INFORMATION_MESSAGE);
 	}	
+	
 	/** COMMUNIQUER PARLER **/
 	public void communiquerParler(){ //pas de conditions de verif
 		if(minute + 10 >= 60)
 			heure = (heure + 1)%24 ;
 		minute = (minute + 10)%60 ;
 		jauge_sociale = jauge_sociale + 20 ;
-		
 		if(jauge_sociale > 100)   //on ne veut pas que jauge_sociale > 100
 			jauge_sociale = 100 ;
+		JOptionPane.showMessageDialog(f2,"Vous avez parlé à Fred pendant 10 minutes.", "Sociabiliser", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	/** COMMUNIQUER RIGOLER **/
@@ -241,6 +279,7 @@ public abstract class PolySims implements Verifier {
 		
 		if(jauge_sociale > 100)   //on ne veut pas que jauge_sociale > 100
 			jauge_sociale = 100 ;
+		JOptionPane.showMessageDialog(f2,"Vous avez rigolé avec Maxime pendant 10 minutes.", "Sociabiliser", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	/** COMMUNIQUER CRITIQUER **/
@@ -252,6 +291,7 @@ public abstract class PolySims implements Verifier {
 		
 		if(jauge_sociale < 0) //on ne veut pas que jauge_sociale < 0
 			jauge_sociale = 0 ;
+		JOptionPane.showMessageDialog(f2,"Vous avez critiqué Lola pendant 10 minutes.", "Etre méchant", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	/** COMMUNIQUER ENGUEULER **/
@@ -260,9 +300,9 @@ public abstract class PolySims implements Verifier {
 			heure = (heure + 1)%24 ;
 		minute = (minute + 10)%60 ;
 		jauge_sociale = jauge_sociale - 20 ;
-		
 		if(jauge_sociale < 0) //on ne veut pas que jauge_sociale < 0
 			jauge_sociale = 0 ;
+		JOptionPane.showMessageDialog(f2,"Vous avez engueuler Nicolas pendant 10 minutes.", "Etre méchant", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	
@@ -273,8 +313,14 @@ public abstract class PolySims implements Verifier {
 			jauge_energie = jauge_energie - 20 ;
 			if (minute+20>= 60)
 				heure = (heure + 1)%24 ;
-			minute = (minute + 20)%60  ;					
+			minute = (minute + 20)%60  ;
+			if(jauge_sociale>100)
+				jauge_sociale=100 ;
+			JOptionPane.showMessageDialog(f2,"Vous avez fait des câlins avec votre ami pendant 20 minutes.", "Faire crac-crac", JOptionPane.INFORMATION_MESSAGE);
 		}
+		else
+			JOptionPane.showMessageDialog(f2,"Vous êtes trop fatigué.", "Implication Club", JOptionPane.INFORMATION_MESSAGE);
+		
 	}
 
 	public void travailler(){
@@ -284,11 +330,17 @@ public abstract class PolySims implements Verifier {
 			if ( this.verif_gagner()){
 				jauge_travail = 100 ;
 			}
+			if (jauge_appetit==0)
+				JOptionPane.showMessageDialog(f2,"Vous devez manger pour ne pas mourir.", "Vous avez faim", JOptionPane.WARNING_MESSAGE) ;
+			if (jauge_energie==0)
+				JOptionPane.showMessageDialog(f2,"Vous devez dormir pour ne pas mourir.", "Vous avez sommeil", JOptionPane.WARNING_MESSAGE) ;
 			if ( this.verif_en_vie() == false){
 				jauge_appetit =0 ;
 				jauge_energie = 0 ;
 			}
 		}
+		else 
+			JOptionPane.showMessageDialog(f2,"Vous êtes trop fatigué pour travailler.", "Travailler", JOptionPane.INFORMATION_MESSAGE);
 	}	
 	public abstract void travailler_spe();
 
@@ -303,6 +355,14 @@ public abstract class PolySims implements Verifier {
 			jauge_travail = 100 ;
 			gagne = true ;
 		}
+		if (jauge_appetit==0)
+			JOptionPane.showMessageDialog(f2,"Vous devez manger pour ne pas mourir.", "Vous avez faim", JOptionPane.WARNING_MESSAGE) ;
+		if (jauge_energie==0)
+			JOptionPane.showMessageDialog(f2,"Vous devez dormir pour ne pas mourir.", "Vous avez sommeil", JOptionPane.WARNING_MESSAGE) ;
+		if ( this.verif_en_vie() == false){
+			jauge_appetit =0 ;
+			jauge_energie = 0 ;
+		}
 		return gagne ;
 	}
 	public abstract void aller_travailler_spe() ;
@@ -313,26 +373,26 @@ public abstract class PolySims implements Verifier {
 			return true ;
 		return false;
 	}
-
 	public boolean verif_dormir() {
 		if((jauge_energie != 100) && (jauge_besoins >=40) && (jauge_hygiene >=40) )
 			return true ;
 		else return false ;	
 	}
 	public boolean verif_se_deplacer() {
-		if(jauge_energie >= 20)
+		if(jauge_energie !=0)
 			return true ;
 		else return false ;
 	}
 	public boolean verif_se_deplacer_ecole(){
-		if(heure>=7 && heure<=22)
+		if(heure>=7)
 			return true ;
 		else return false ;
 	}
 	public boolean verif_se_deplacer_soiree(){
 		if(heure>=18)
 			return true ;
-		else return false ;
+		else 
+			return false ;
 	}
 	public boolean verif_aller_toilettes() {
 		if(jauge_besoins != 100)
@@ -345,23 +405,17 @@ public abstract class PolySims implements Verifier {
 		else return false ;
 	}
 	public boolean verif_aller_travailler() {
-		if((lieu == "ecole") && (jauge_energie> 20) && (jauge_appetit> 40))
+		if((lieu == "ecole") && (jauge_energie>= 20) && (jauge_appetit>= 40))
 			return true ;
 		else return false ;
 	}
 	public boolean verif_travailler() {
-		if((lieu == "maison") )
-			return true ;
-		else return false ;
-	}
-
-	public boolean verif_implication_club() {
-		if((heure <= 23) && (heure >= 18))
+		if((lieu == "maison" && jauge_energie>=10) )
 			return true ;
 		else return false ;
 	}
 	public boolean verif_se_reproduire() {
-		if(jauge_energie > 20)
+		if(jauge_energie >= 20)
 			return true ;
 		else return false ;
 	}
@@ -375,4 +429,5 @@ public abstract class PolySims implements Verifier {
 			enVie = false ;
 		return enVie ;
 	}
+	
 }

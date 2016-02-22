@@ -40,7 +40,7 @@ import javax.swing.event.DocumentListener;
 
 public class Panneau2 extends JPanel{
 // Attibut pour la mise en route du jeu 
-	private Fentre2 f2 = new Fentre2();
+	private Fenetre2 f2 = new Fenetre2();
 	
 	//Bouton 
 	private JButton bouton = new JButton ("Valider") ;
@@ -134,7 +134,7 @@ public class Panneau2 extends JPanel{
 	private JButton btAllerTravailler= new JButton() ;
 	private JButton btTravailler = new JButton ();
 	private JButton btImpliquerClubPolyHack = new JButton ("Aider PolyHack");
-	private JButton btImpliquerClubPompom = new JButton ("S'impliquer au \n club Pompom ");
+	private JButton btImpliquerClubPompom = new JButton ("Aider Pompom ");
 	private JButton btRaser = new JButton("Se raser") ; ;
 	private JButton btMaquiller = new JButton ("Se maquiller") ;
 	private JButton btTomberEnceinte = new JButton ("Tomber enceinte");
@@ -152,6 +152,9 @@ public class Panneau2 extends JPanel{
 	private allerTravaillerAction allerTravaillera = new allerTravaillerAction() ;
 	private communiquerDiversAction communiquerDiversa = new communiquerDiversAction () ;
 	private communiquerAction communiquera = new communiquerAction() ; 
+	private enceinteAction enceintea = new enceinteAction() ;
+	private integrerClubAction integreCluba = new integrerClubAction() ;
+	private maquillerAction maquillera = new maquillerAction() ;
 	
 	//Jauge du bas
 	private JLabel jauge = new JLabel () ;
@@ -205,11 +208,15 @@ public class Panneau2 extends JPanel{
 		btTravailler.addActionListener(travaillera);
 		btAllerTravailler.addActionListener(allerTravaillera);
 		btCommuniquer.addActionListener(communiquera);
-		btCommuniquerParler.addActionListener(communiquera);
+		btCommuniquerParler.addActionListener(communiquerDiversa);
 		btCommuniquerRigoler.addActionListener(communiquerDiversa);
 		btCommuniquerCritiquer.addActionListener(communiquerDiversa);
 		btCommuniquerEngueuler.addActionListener(communiquerDiversa);
 		btCommuniquerReproduire.addActionListener(communiquerDiversa);
+		btImpliquerClubPolyHack.addActionListener(integreCluba) ;
+		btImpliquerClubPompom.addActionListener(integreCluba);
+		btTomberEnceinte.addActionListener(enceintea);
+		btMaquiller.addActionListener(maquillera) ;
 	}
 	
 	public void paintComponent(Graphics g){		
@@ -389,7 +396,14 @@ public class Panneau2 extends JPanel{
 					}
 					jauge.setText("Energie : "+ hProf.getEn() +"    Hygiene :"+ hProf.getHy() +"    Besoins :"+ hProf.getBe()+
 							"    Appetit :"+hProf.getAp()+"   Social: "+hProf.getSo()+"    Travail :"+hProf.getTr());	
-					horloge.setText(hProf.getHeure()+":"+hProf.getMinute()) ;
+					if(hProf.getHeure()<10)
+						horloge.setText("0"+hProf.getHeure()+":"+hProf.getMinute()) ;
+					else if (hProf.getHeure()<10 && hProf.getMinute()<10)
+						horloge.setText("0"+hProf.getHeure()+":0"+hProf.getMinute()) ;
+					else if (hProf.getMinute()<10)
+						horloge.setText(hProf.getHeure()+":0"+hProf.getMinute()) ;
+					else 
+						horloge.setText(hProf.getHeure()+":"+hProf.getMinute()) ;
 				}
 				else if (sexe == "F"){
 					String fichierProfF = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\ProfF.jpg";
@@ -401,7 +415,14 @@ public class Panneau2 extends JPanel{
 					}
 					jauge.setText("Energie : "+ fProf.getEn() +"    Hygiene :"+ fProf.getHy() +"    Besoins :"+ fProf.getBe()+
 						"    Appetit :"+fProf.getAp()+"   Social: "+fProf.getSo()+"    Travail :"+fProf.getTr());					
-					horloge.setText(fProf.getHeure()+":"+fProf.getMinute()) ;
+					if(fProf.getHeure()<10)
+						horloge.setText("0"+fProf.getHeure()+":"+fProf.getMinute()) ;
+					else if (fProf.getHeure()<10 && fProf.getMinute()<10)
+						horloge.setText("0"+fProf.getHeure()+":0"+fProf.getMinute()) ;
+					else if (fProf.getMinute()<10)
+						horloge.setText(fProf.getHeure()+":0"+fProf.getMinute()) ;
+					else 
+						horloge.setText(fProf.getHeure()+":"+fProf.getMinute()) ;
 				}
 			}
 			else if (genre == "PolyStud"){
@@ -415,7 +436,14 @@ public class Panneau2 extends JPanel{
 						}
 						jauge.setText("Energie : "+ hInfo.getEn() +"    Hygiene :"+ hInfo.getHy() +"    Besoins :"+ hInfo.getBe()+
 								"    Appetit :"+hInfo.getAp()+"   Social: "+hInfo.getSo()+"    Travail :"+hInfo.getTr());					
-						horloge.setText(hInfo.getHeure()+":"+hInfo.getMinute()) ;
+						if(hInfo.getHeure()<10)
+							horloge.setText("0"+hInfo.getHeure()+":"+hInfo.getMinute()) ;
+						else if (hInfo.getHeure()<10 && hInfo.getMinute()<10)
+							horloge.setText("0"+hInfo.getHeure()+":0"+hInfo.getMinute()) ;
+						else if (hInfo.getMinute()<10)
+							horloge.setText(hInfo.getHeure()+":0"+hInfo.getMinute()) ;
+						else 
+							horloge.setText(hInfo.getHeure()+":"+hInfo.getMinute()) ;
 					}
 					else if (filiere == "Info" &&sexe == "F"){
 						String fichierInfoF = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\StudInfoF.png";
@@ -427,7 +455,14 @@ public class Panneau2 extends JPanel{
 						}
 						jauge.setText("Energie : "+ fInfo.getEn() +"    Hygiene :"+ fInfo.getHy() +"    Besoins :"+ fInfo.getBe()+
 								"    Appetit :"+fInfo.getAp()+"   Social: "+fInfo.getSo()+"    Travail :"+fInfo.getTr());					
-						horloge.setText(fInfo.getHeure()+":"+fInfo.getMinute()) ;
+						if(fInfo.getHeure()<10)
+							horloge.setText("0"+fInfo.getHeure()+":"+fInfo.getMinute()) ;
+						else if (fInfo.getHeure()<10 && fInfo.getMinute()<10)
+							horloge.setText("0"+fInfo.getHeure()+":0"+fInfo.getMinute()) ;
+						else if (fInfo.getMinute()<10)
+							horloge.setText(fInfo.getHeure()+":0"+fInfo.getMinute()) ;
+						else 
+							horloge.setText(fInfo.getHeure()+":"+fInfo.getMinute()) ;
 					}
 					else if (filiere =="Gbma" && sexe =="H"){
 						String fichierGbmaH = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\StudGbmaH.png";
@@ -439,7 +474,14 @@ public class Panneau2 extends JPanel{
 						}
 						jauge.setText("Energie : "+ hGbma.getEn() +"    Hygiene :"+ hGbma.getHy() +"    Besoins :"+ hGbma.getBe()+
 								"    Appetit :"+hGbma.getAp()+"   Social: "+hGbma.getSo()+"    Travail :"+hGbma.getTr());
-						horloge.setText(hGbma.getHeure()+":"+hGbma.getMinute()) ;
+						if(hGbma.getHeure()<10)
+							horloge.setText("0"+hGbma.getHeure()+":"+hGbma.getMinute()) ;
+						else if (hGbma.getHeure()<10 && hGbma.getMinute()<10)
+							horloge.setText("0"+hGbma.getHeure()+":0"+hGbma.getMinute()) ;
+						else if (hGbma.getMinute()<10)
+							horloge.setText(hGbma.getHeure()+":0"+hGbma.getMinute()) ;
+						else 
+							horloge.setText(hGbma.getHeure()+":"+hGbma.getMinute()) ;
 					}
 					else if (filiere=="Gbma" && sexe == "F"){
 						String fichierGbmaF = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\StudGbmaF.png";
@@ -451,7 +493,14 @@ public class Panneau2 extends JPanel{
 						}
 						jauge.setText("Energie : "+ fGbma.getEn() +"    Hygiene :"+ fGbma.getHy() +"    Besoins :"+ fGbma.getBe()+
 								"    Appetit :"+fGbma.getAp()+"   Social: "+fGbma.getSo()+"    Travail :"+fGbma.getTr());
-						horloge.setText(fGbma.getHeure()+":"+fGbma.getMinute()) ;
+						if(fGbma.getHeure()<10)
+							horloge.setText("0"+fGbma.getHeure()+":"+fGbma.getMinute()) ;
+						else if (fGbma.getHeure()<10 && fGbma.getMinute()<10)
+							horloge.setText("0"+fGbma.getHeure()+":0"+fGbma.getMinute()) ;
+						else if (fGbma.getMinute()<10)
+							horloge.setText(fGbma.getHeure()+":0"+fGbma.getMinute()) ;
+						else 
+							horloge.setText(fGbma.getHeure()+":"+fGbma.getMinute()) ;
 					}
 			}
 			jauge.setBounds(400, 570, 600, 100);
@@ -998,38 +1047,26 @@ public class Panneau2 extends JPanel{
 					if (genre == "PolyProf" && sexe == "H"){
 						hProf.seDeplacerSoiree();
 						lieu = hProf.getLieu();
-						if(hProf.verif_se_deplacer_soiree()==false)
-							JOptionPane.showMessageDialog(f2,"Vous ne pouvez vous rendre en soirée seulement de 18h à 2h.", "Déplacer", JOptionPane.INFORMATION_MESSAGE);
 					}
 					else if (genre == "PolyProf" && sexe == "F"){
 						fProf.seDeplacerSoiree();
 						lieu = fProf.getLieu() ;
-						if(fProf.verif_se_deplacer_soiree()==false)
-							JOptionPane.showMessageDialog(f2,"Vous ne pouvez vous rendre en soirée seulement de 18h à 2h.", "Déplacer", JOptionPane.INFORMATION_MESSAGE);
 					}
 					else if (genre == "PolyStud" && filiere == "Info" && sexe == "H"){
 						hInfo.seDeplacerSoiree();
 						lieu = hInfo.getLieu() ;
-						if(hInfo.verif_se_deplacer_soiree()==false)
-							JOptionPane.showMessageDialog(f2,"Vous ne pouvez vous rendre en soirée seulement de 18h à 2h.", "Déplacer", JOptionPane.INFORMATION_MESSAGE);
 					}
 					else if (genre == "PolyStud" && filiere == "Info" && sexe == "F"){
 						fInfo.seDeplacerSoiree();
 						lieu = fInfo.getLieu() ;
-						if(fInfo.verif_se_deplacer_soiree()==false)
-							JOptionPane.showMessageDialog(f2,"Vous ne pouvez vous rendre en soirée seulement de 18h à 2h.", "Déplacer", JOptionPane.INFORMATION_MESSAGE);
 					}
 					else if (genre == "PolyStud" && filiere == "Gbma" && sexe == "H"){
 						hGbma.seDeplacerSoiree();
 						lieu = hGbma.getLieu() ;
-						if(hGbma.verif_se_deplacer_soiree()==false)
-							JOptionPane.showMessageDialog(f2,"Vous ne pouvez vous rendre en soirée seulement de 18h à 2h.", "Déplacer", JOptionPane.INFORMATION_MESSAGE);
 					}
 					else if (genre == "PolyStud" && filiere == "Gbma" && sexe == "F"){
 						fGbma.seDeplacerSoiree();
 						lieu = fGbma.getLieu() ;
-						if(fGbma.verif_se_deplacer_soiree()==false)
-							JOptionPane.showMessageDialog(f2,"Vous ne pouvez vous rendre en soirée seulement de 18h à 2h.", "Déplacer", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
 				nbClicBtDeplacer=0 ;
@@ -1135,8 +1172,8 @@ public class Panneau2 extends JPanel{
 						clic = 3 ;
 					if(hProf.getEnVie()==false)
 						clic=4 ;
-					if(hProf.getEn()<=20 && hProf.getAp()<=20 && (hProf.getAp()!=0 || hProf.getEn()!=0))
-						JOptionPane.showMessageDialog(f2,"Vous risquez de mourir."+"\n"+"Vous devez dormir et manger", "Attention", JOptionPane.WARNING_MESSAGE);
+					//if(hProf.getEn()<=20 && hProf.getAp()<=20 && (hProf.getAp()!=0 || hProf.getEn()!=0))
+						//JOptionPane.showMessageDialog(f2,"Vous risquez de mourir."+"\n"+"Vous devez dormir et manger", "Attention", JOptionPane.WARNING_MESSAGE);
 				}
 				else if (genre == "PolyProf" && sexe == "F"){
 					fProf.travailler();
@@ -1288,6 +1325,40 @@ public class Panneau2 extends JPanel{
 				}
 				nbClicBtCommuniquer = 0 ;
 				repaint() ;
+			}
+		}
+		
+		public class integrerClubAction implements ActionListener{
+			public void actionPerformed(ActionEvent ae){
+				if(ae.getActionCommand()=="Aider PolyHack"){
+					if (sexe =="H")
+						hInfo.implication_club();
+					if (sexe =="F")
+						fInfo.implication_club();
+				}
+				else if(ae.getActionCommand()=="Aider Pompom"){
+					if (sexe =="H")
+						hGbma.implication_club();
+					if (sexe =="H")
+						fGbma.implication_club();
+				}
+			}
+		}
+		
+		public class enceinteAction implements ActionListener{
+			public void actionPerformed(ActionEvent ae){
+					fProf.tomberEnceinte();
+			}
+		}
+		
+		public class maquillerAction implements ActionListener{
+			public void actionPerformed(ActionEvent ae){
+				if(genre=="PolyProf")
+					fProf.seMaquiller();
+				else if (filiere =="Info")
+					fInfo.seMaquiller();
+				else if(filiere =="Gbma")
+					fGbma.seMaquiller();
 			}
 		}
 }
