@@ -24,10 +24,5 @@ public class HInfo extends Info implements VerifierH{
 			return true ;
 		else return false ;
 	}
-	public boolean verif_impliquerClub() {
-		return false;
-	}
-
-
 	
 }

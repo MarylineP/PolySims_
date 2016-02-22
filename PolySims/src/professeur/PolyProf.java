@@ -17,7 +17,7 @@ public abstract class PolyProf extends PolySims{
 	public void travailler_spe(){
 		heure = (heure + 2)%24 ;
 		jauge_travail = jauge_travail + 3 ;	
-		JOptionPane.showMessageDialog(f2,"Vous avez mis 2h pour faire vos devoirs."+"\n"+"Vous avez augmenté votre jauge travail de 3.", "Devoirs", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(f2,"Vous avez mis 2h pour corriger des copies."+"\n"+"Vous avez augmenté votre jauge travail de 3.", "Devoirs", JOptionPane.INFORMATION_MESSAGE);
 	}
 		
 		

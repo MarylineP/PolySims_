@@ -134,7 +134,7 @@ public class Panneau2 extends JPanel{
 	private JButton btAllerTravailler= new JButton() ;
 	private JButton btTravailler = new JButton ();
 	private JButton btImpliquerClubPolyHack = new JButton ("Aider PolyHack");
-	private JButton btImpliquerClubPompom = new JButton ("Aider Pompom ");
+	private JButton btImpliquerClubPompom = new JButton ("Aider Pompom");
 	private JButton btRaser = new JButton("Se raser") ; ;
 	private JButton btMaquiller = new JButton ("Se maquiller") ;
 	private JButton btTomberEnceinte = new JButton ("Tomber enceinte");
@@ -296,7 +296,7 @@ public class Panneau2 extends JPanel{
 		//Clic sur commencer
 		else if (clic == 2 ){			
 			//Affichage nom + Prénom + Age sous la photo
-			prenom.setBounds(100, 480, 100, 20) ;
+			prenom.setBounds(100, 480, 200, 20) ;
 			description.setBounds(100, 500,100,20);
 			prenom.setText(nomP + " " + prenomP );
 			description.setText(genre + " - " + ageP + " ans");
@@ -671,7 +671,7 @@ public class Panneau2 extends JPanel{
 					btImpliquerClubPolyHack.setVisible(true); 
 				else if (filiere == "Gbma")
 					btImpliquerClubPompom.setVisible(true); 
-				if (sexe == "F")
+				if (genre =="PolyProf" && sexe == "F")
 					btTomberEnceinte.setVisible(true);
 			}
 		}
@@ -810,8 +810,8 @@ public class Panneau2 extends JPanel{
 				repaint () ;	
 				JOptionPane.showMessageDialog(f2,"Vous êtes chez vous."+"\n"+"Il est 7h30."+"\n"+"Passez un bonne journée !", "Bienvenue", JOptionPane.INFORMATION_MESSAGE);
 			}	
-			if (clic == 4){
-				//Fermer la fenetre avec le bouton Quitter
+			if (clic == 4 || clic ==3){
+				System.exit(0); 
 			}
 		}
 	}
@@ -1339,7 +1339,7 @@ public class Panneau2 extends JPanel{
 				else if(ae.getActionCommand()=="Aider Pompom"){
 					if (sexe =="H")
 						hGbma.implication_club();
-					if (sexe =="H")
+					if (sexe =="F")
 						fGbma.implication_club();
 				}
 			}

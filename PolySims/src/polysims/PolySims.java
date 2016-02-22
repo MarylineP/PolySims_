@@ -125,7 +125,10 @@ public abstract class PolySims implements Verifier {
 				jauge_appetit = jauge_appetit - 30 ;
 			else if (jauge_appetit<30)
 				jauge_appetit = 0 ;
-			JOptionPane.showMessageDialog(f2,"Vous avez dormi 6h."+"\n"+"Vos jauges besoin et hygiène ont diminuées de 40%.","Bon réveil", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(f2,"Vous avez dormi 6h."+"\n"+"Vos jauges besoin et hygiène ont diminuées de 40.","Bon réveil", JOptionPane.INFORMATION_MESSAGE);
+			if (jauge_appetit==0)
+				JOptionPane.showMessageDialog(f2,"Vous devez manger pour ne pas mourir.", "Attention", JOptionPane.WARNING_MESSAGE) ;
+			
 		}	
 		else 
 			JOptionPane.showMessageDialog(f2,"Vous ne pouvez pas dormir."+"\n"+"Vous êtes déjà en forme ou vous avez besoin de vous douchez ou d'aller au toilette.", "Dormir", JOptionPane.INFORMATION_MESSAGE);
@@ -221,7 +224,7 @@ public abstract class PolySims implements Verifier {
 			minute = (minute + 30)%60 ;
 			if(jauge_energie < 0)   
 				jauge_energie = 0 ;
-			JOptionPane.showMessageDialog(f2,"Vous avez mis 30 minutes pour rentrer chez vous."+"\n"+"Vous avez perdu 30% d'énergie.", "Maison", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(f2,"Vous avez mis 30 minutes pour rentrer chez vous."+"\n"+"Vous avez perdu 30 énergies.", "Maison", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else 
 			JOptionPane.showMessageDialog(f2,"Vous n'avez pas assez d'énergie pour vous déplacer.", "Se déplacer", JOptionPane.INFORMATION_MESSAGE);
@@ -237,7 +240,10 @@ public abstract class PolySims implements Verifier {
 			minute = (minute + 30)%60 ; 
 			if(jauge_energie < 0)   
 				jauge_energie = 0 ;
-			JOptionPane.showMessageDialog(f2,"Vous avez mis 30 minutes pour aller en soirée."+"\n"+"Vous avez perdu 30% d'énergie.", "Soirée", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(f2,"Vous avez mis 30 minutes pour aller en soirée."+"\n"+"Vous avez perdu 30 énergies.", "Soirée", JOptionPane.INFORMATION_MESSAGE);
+			if (jauge_energie==0)
+				JOptionPane.showMessageDialog(f2,"Vous devez dormir pour ne pas mourir.", "Attention", JOptionPane.WARNING_MESSAGE) ;
+			
 		}
 		else 
 			JOptionPane.showMessageDialog(f2,"Vous ne pouvez vous rendre en soirée qu'à partir de 18h."+"\n"+"Reposez vous avant de partir.", "Déplacer", JOptionPane.INFORMATION_MESSAGE);
@@ -253,7 +259,7 @@ public abstract class PolySims implements Verifier {
 			lieu = "ecole" ;
 			if(jauge_energie < 0)   
 				jauge_energie = 0 ;
-			JOptionPane.showMessageDialog(f2,"Vous avez mis 30 minutes pour aller à l'école."+"\n"+"Vous avez perdu 30% d'énergie.", "Ecole", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(f2,"Vous avez mis 30 minutes pour aller à l'école."+"\n"+"Vous avez perdu 30 énergies.", "Ecole", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else 
 			JOptionPane.showMessageDialog(f2,"Vous ne pouvez vous rendre à l'école qu'à partir de 7h.", "Déplacer", JOptionPane.INFORMATION_MESSAGE);
@@ -330,10 +336,8 @@ public abstract class PolySims implements Verifier {
 			if ( this.verif_gagner()){
 				jauge_travail = 100 ;
 			}
-			if (jauge_appetit==0)
-				JOptionPane.showMessageDialog(f2,"Vous devez manger pour ne pas mourir.", "Vous avez faim", JOptionPane.WARNING_MESSAGE) ;
-			if (jauge_energie==0)
-				JOptionPane.showMessageDialog(f2,"Vous devez dormir pour ne pas mourir.", "Vous avez sommeil", JOptionPane.WARNING_MESSAGE) ;
+			if (jauge_appetit==0 ||jauge_energie==0)
+				JOptionPane.showMessageDialog(f2,"Une de vos deux jauges cruciales sont vides."+"\n"+"Vous devez manger ou dormir.", "Attention", JOptionPane.WARNING_MESSAGE) ;
 			if ( this.verif_en_vie() == false){
 				jauge_appetit =0 ;
 				jauge_energie = 0 ;
@@ -355,10 +359,8 @@ public abstract class PolySims implements Verifier {
 			jauge_travail = 100 ;
 			gagne = true ;
 		}
-		if (jauge_appetit==0)
-			JOptionPane.showMessageDialog(f2,"Vous devez manger pour ne pas mourir.", "Vous avez faim", JOptionPane.WARNING_MESSAGE) ;
-		if (jauge_energie==0)
-			JOptionPane.showMessageDialog(f2,"Vous devez dormir pour ne pas mourir.", "Vous avez sommeil", JOptionPane.WARNING_MESSAGE) ;
+		if (jauge_appetit==0 ||jauge_energie==0)
+			JOptionPane.showMessageDialog(f2,"Une de vos deux jauges cruciales sont vides."+"\n"+"Vous devez manger ou dormir.", "Attention", JOptionPane.WARNING_MESSAGE) ;
 		if ( this.verif_en_vie() == false){
 			jauge_appetit =0 ;
 			jauge_energie = 0 ;

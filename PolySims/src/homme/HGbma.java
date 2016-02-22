@@ -24,7 +24,4 @@ public class HGbma extends Gbma implements VerifierH{
 			return true ;
 		else return false ;
 	}
-	public boolean verif_impliquerClub() {
-		return false;
-	}
 }

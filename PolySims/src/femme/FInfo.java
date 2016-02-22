@@ -28,9 +28,5 @@ public class FInfo extends Info implements VerifierF{
 	public boolean verif_tomberEnceinte() {
 		return false ;
 	}
-	public boolean verif_impliquerClub() {
-		return false;
-	}
-
 	
 }

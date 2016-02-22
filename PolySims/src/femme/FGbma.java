@@ -29,9 +29,6 @@ public class FGbma extends Gbma implements VerifierF {
 	public boolean verif_tomberEnceinte() {
 		return false;
 	}
-	public boolean verif_impliquerClub() {
-		return false;
-	}
 
 	
 }
