@@ -222,7 +222,7 @@ public class Panneau2 extends JPanel{
 	public void paintComponent(Graphics g){		
 		super.paintComponent(g);
 
-		String fBienvenue = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\Bienvenue.png";
+		String fBienvenue = "\\Bienvenue.png";
 		String fBravo = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\Bravo.png";
 		if (clic == 0 ){
 			try{
