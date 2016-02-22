@@ -12,4 +12,14 @@ public class FProf extends PolyProf implements VerifierF {
 	public void tomberEnceinte(){
 		
 	}
+	@Override
+	public void verif_seMaquiller() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void verif_tomberEnceinte() {
+		// TODO Auto-generated method stub
+		
+	}
 }

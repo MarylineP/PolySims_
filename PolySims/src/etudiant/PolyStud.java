@@ -5,33 +5,29 @@ import polysims.PolySims;
 public abstract class PolyStud extends PolySims{
 
 	// Ce qui définit un PolyProf
-	private String filiere ;
+	protected String filiere ;
 	
 	/** ASSISTER A UN COURS **/
 	public void aller_travailler_spe(){ 
-		System.out.println("Votre PolySim va en cours");
-		heure = heure + 4 ;
-		jauge_travail = jauge_travail + 2 ;
-		jauge_energie = jauge_energie - 20 ;
-		jauge_appetit = jauge_appetit - 40 ;
+		jauge_travail = jauge_travail + 4 ;
 	}
 	
 	/** FAIRE SES DEVOIRS **/
 	public void travailler_spe(){ 
-		System.out.println("Votre PolySim fait ses devoirs");
-		heure = heure + 1 ;
-		jauge_travail = jauge_travail + 5 ;
-		jauge_energie = jauge_energie - 10 ;
-		
+		heure = (heure + 1)%24 ;
+		jauge_travail = jauge_travail + 4 ;					
 	}
 	
 	/** S'IMPLIQUER DANS UN CLUB **/
 	public void implication_club(){
-		//if(verifier.verif_implication_club())
-				{
-			System.out.println("Votre PolySim va à son club");
-			heure = heure + 1 ;
-			jauge_sociale = jauge_sociale + 30 ;
+		if(this.verif_implication_club()) {
+			if(verif_implication_club()){
+				heure = (heure + 1)%24 ;
+				implication_club_spe() ;
+				if (jauge_sociale > 100)
+					jauge_sociale = 100 ; //pour eviter que la jau&ge sociale soit superieure a 100
+			}
 		}
 	}
+	public abstract void implication_club_spe() ;
 }
