@@ -26,8 +26,8 @@ public class Panneau1 extends JPanel{
 	public void paintComponent(Graphics g){		
 		super.paintComponent(g);
 	
-		String fLogo = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\Logo_PolySims2.png";
-		String fSims = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\Sims4.png";
+		String fLogo = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\Logo_PolySims2.png";
+		String fSims = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\Sims4.png";
 		try {
 			BufferedImage iLogo = ImageIO.read(new File(fLogo)) ;
 			BufferedImage iSims = ImageIO.read(new File(fSims)) ;
