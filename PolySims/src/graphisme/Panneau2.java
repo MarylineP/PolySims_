@@ -222,8 +222,8 @@ public class Panneau2 extends JPanel{
 	public void paintComponent(Graphics g){		
 		super.paintComponent(g);
 
-		String fBienvenue = "\\Bienvenue.png";
-		String fBravo = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\Bravo.png";
+		String fBienvenue = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\Bienvenue.png";
+		String fBravo = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\Bravo.png";
 		if (clic == 0 ){
 			try{
 				BufferedImage iBienvenue = ImageIO.read(new File(fBienvenue)) ;
@@ -387,7 +387,7 @@ public class Panneau2 extends JPanel{
 			
 			if(genre == "PolyProf" ){	
 				if (sexe == "H" ){	
-					String fichierProfH = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\ProfH.png";
+					String fichierProfH = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\ProfH.png";
 					try {
 						BufferedImage imageProfH = ImageIO.read(new File(fichierProfH)) ;
 						g.drawImage(imageProfH, 20, 150, null) ;
@@ -406,7 +406,7 @@ public class Panneau2 extends JPanel{
 						horloge.setText(hProf.getHeure()+":"+hProf.getMinute()) ;
 				}
 				else if (sexe == "F"){
-					String fichierProfF = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\ProfF.jpg";
+					String fichierProfF = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\ProfF.jpg";
 					try {
 						BufferedImage imageProfF = ImageIO.read(new File(fichierProfF)) ;
 						g.drawImage(imageProfF, 20, 150, null) ;
@@ -427,7 +427,7 @@ public class Panneau2 extends JPanel{
 			}
 			else if (genre == "PolyStud"){
 					if (filiere =="Info" && sexe == "H"){
-						String fichierInfoH = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\StudInfoH.png";
+						String fichierInfoH = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\StudInfoH.png";
 						try {
 							BufferedImage imageInfoH = ImageIO.read(new File(fichierInfoH)) ;
 							g.drawImage(imageInfoH, 20, 150, null) ;
@@ -446,7 +446,7 @@ public class Panneau2 extends JPanel{
 							horloge.setText(hInfo.getHeure()+":"+hInfo.getMinute()) ;
 					}
 					else if (filiere == "Info" &&sexe == "F"){
-						String fichierInfoF = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\StudInfoF.png";
+						String fichierInfoF = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\StudInfoF.png";
 						try {
 						BufferedImage imageInfoF = ImageIO.read(new File(fichierInfoF)) ;
 						g.drawImage(imageInfoF, 20, 150, null) ;
@@ -465,7 +465,7 @@ public class Panneau2 extends JPanel{
 							horloge.setText(fInfo.getHeure()+":"+fInfo.getMinute()) ;
 					}
 					else if (filiere =="Gbma" && sexe =="H"){
-						String fichierGbmaH = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\StudGbmaH.png";
+						String fichierGbmaH = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\StudGbmaH.png";
 						try {
 							BufferedImage imageGbmaH = ImageIO.read(new File(fichierGbmaH)) ;
 							g.drawImage(imageGbmaH, 20, 150, null) ;
@@ -484,7 +484,7 @@ public class Panneau2 extends JPanel{
 							horloge.setText(hGbma.getHeure()+":"+hGbma.getMinute()) ;
 					}
 					else if (filiere=="Gbma" && sexe == "F"){
-						String fichierGbmaF = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\StudGbmaF.png";
+						String fichierGbmaF = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\StudGbmaF.png";
 						try {
 							BufferedImage imageGbmaF = ImageIO.read(new File(fichierGbmaF)) ;
 							g.drawImage(imageGbmaF, 20, 150, null) ;
@@ -512,7 +512,7 @@ public class Panneau2 extends JPanel{
 			
 			if (lieu=="maison"){
 				//Affichage titre 
-				String maison = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\maison.png";
+				String maison = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\maison.png";
 				try {
 					BufferedImage texteMaison = ImageIO.read(new File(maison)) ;
 					g.drawImage(texteMaison, 500, 20, null) ;
@@ -520,7 +520,7 @@ public class Panneau2 extends JPanel{
 					e.printStackTrace();
 				}
 				//Affichage icone
-				String iconeMaison = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\icone_maison.png";
+				String iconeMaison = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\icone_maison.png";
 				try {
 					BufferedImage iconeM = ImageIO.read(new File(iconeMaison)) ;
 					g.drawImage(iconeM, 800, 25, null) ;
@@ -568,7 +568,7 @@ public class Panneau2 extends JPanel{
 			}			
 			else if (lieu=="ecole"){
 				//Affichage titre 
-				String ecole = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\ecole.png";
+				String ecole = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\ecole.png";
 				try {
 					BufferedImage texteEcole = ImageIO.read(new File(ecole)) ;
 					g.drawImage(texteEcole, 500, 20, null) ;
@@ -576,7 +576,7 @@ public class Panneau2 extends JPanel{
 					e.printStackTrace();
 				}
 				//Affichage icone
-				String iconeEcole = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\icone_ecole.jpg";
+				String iconeEcole = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\icone_ecole.jpg";
 				try {
 					BufferedImage iconeE = ImageIO.read(new File(iconeEcole)) ;
 					g.drawImage(iconeE, 750, 25, null) ;
@@ -617,7 +617,7 @@ public class Panneau2 extends JPanel{
 			}
 			else if (lieu=="soiree"){
 				//Affichage titre 
-				String soiree = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\soiree.png";
+				String soiree = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\soiree.png";
 				try {
 					BufferedImage texteSoiree = ImageIO.read(new File(soiree)) ;
 					g.drawImage(texteSoiree, 500, 20, null) ;
@@ -625,7 +625,7 @@ public class Panneau2 extends JPanel{
 					e.printStackTrace();
 				}
 				//Affichage icone
-				String iconeSoiree = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\icone_soiree.jpg";
+				String iconeSoiree = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\icone_soiree.jpg";
 				try {
 					BufferedImage iconeS = ImageIO.read(new File(iconeSoiree)) ;
 					g.drawImage(iconeS, 800, 25, null) ;
@@ -678,7 +678,7 @@ public class Panneau2 extends JPanel{
 		else if (clic == 3){
 			if(genre =="PolyProf"){
 				//Affichage titre 
-				String fRetraite = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\texteRetraite.png";
+				String fRetraite = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\texteRetraite.png";
 				try{
 					BufferedImage iRetraite = ImageIO.read(new File(fRetraite)) ;
 					g.drawImage(iRetraite, 450, 10, null) ;
@@ -686,7 +686,7 @@ public class Panneau2 extends JPanel{
 					e.printStackTrace();
 				}
 				//Affichage image
-				String retraite = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\retraite.jpg";
+				String retraite = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\retraite.jpg";
 				try {
 					BufferedImage imageRetraite = ImageIO.read(new File(retraite)) ;
 					g.drawImage(imageRetraite, 450, 130, null) ;
@@ -696,7 +696,7 @@ public class Panneau2 extends JPanel{
 			}
 			else if (genre =="PolyStud"){
 				//Affichage titre 
-				String fDiplome = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\texteDiplome.png";
+				String fDiplome = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\texteDiplome.png";
 					try{
 						BufferedImage iDiplome = ImageIO.read(new File(fDiplome)) ;
 						g.drawImage(iDiplome, 450, 20, null) ;
@@ -704,7 +704,7 @@ public class Panneau2 extends JPanel{
 						e.printStackTrace();
 					}
 				//Affichage image
-				String diplome = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\diplome.jpg";
+				String diplome = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\diplome.jpg";
 				try {
 					BufferedImage imageDiplome = ImageIO.read(new File(diplome)) ;
 					g.drawImage(imageDiplome, 400, 200, null) ;
@@ -715,7 +715,7 @@ public class Panneau2 extends JPanel{
 		}
 		else if (clic==4){
 			//Affichage titre 
-			String fMort = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\texteMort.png";
+			String fMort = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\texteMort.png";
 				try{
 					BufferedImage iMort = ImageIO.read(new File(fMort)) ;
 					g.drawImage(iMort, 450, 20, null) ;
@@ -723,7 +723,7 @@ public class Panneau2 extends JPanel{
 					e.printStackTrace();
 				}
 			//Affichage image
-			String mort = "C:\\Users\\Maryline\\Documents\\Cours_IRM4A\\POO\\Projet_Jeux\\mort.jpg";
+			String mort = "C:\\Users\\Maryline\\git\\LocalGame\\PolySims\\src\\mort.jpg";
 			try {
 				BufferedImage imageMort = ImageIO.read(new File(mort)) ;
 				g.drawImage(imageMort, 350, 200, null) ;
